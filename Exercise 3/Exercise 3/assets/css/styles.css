@@ -1,0 +1,699 @@
+/* ============================================================
+   Appliance Energy Consumption Website
+   Single external stylesheet, shared by all three pages.
+
+   Sections:
+     1. Design tokens (colours, type, spacing)
+     2. Base / reset
+     3. Layout helpers
+     4. Header & navigation
+     5. Hero + energy scale (signature element)
+     6. Cards, tables, FAQ accordion
+     7. Calculator
+     8. Footer
+     9. Responsive rules
+   ============================================================ */
+
+/* ---------- 1. Design tokens -------------------------------
+   Colours are taken from the power logo: dark slate body,
+   amber "electricity" accent. If your logo colours differ,
+   change them ONCE here and the whole site updates.
+   ---------------------------------------------------------- */
+:root {
+  --ink:        #14202b;   /* logo dark slate  */
+  --ink-soft:   #3d5163;
+  --amber:      #f2a20c;   /* logo amber       */
+  --amber-deep: #c07c00;
+  --teal:       #0e6e6b;   /* "efficient"      */
+  --red:        #b3321f;   /* "high use"       */
+  --paper:      #eef1f3;   /* page background  */
+  --card:       #ffffff;
+  --rule:       #c9d2d6;
+
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "IBM Plex Sans", system-ui, sans-serif;
+  --font-data:    "IBM Plex Mono", "Courier New", monospace;
+
+  --wrap: 1080px;
+  --radius: 4px;
+}
+
+/* ---------- 2. Base ---------------------------------------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+h3 { font-size: 1.15rem; }
+
+p { margin: 0 0 1em; }
+
+a { color: var(--teal); }
+
+/* Keyboard focus must always be visible for accessibility. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Visible to screen readers only — used for table headings that
+   would look redundant on screen. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Small uppercase label used above section headings. */
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.6em;
+}
+
+/* ---------- 3. Layout helpers ------------------------------ */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section { padding: 56px 0; }
+.section--tight { padding: 32px 0; }
+
+.note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--rule);
+  padding-left: 12px;
+}
+
+/* ---------- 4. Header & navigation ------------------------- */
+.site-header {
+  background: var(--ink);
+  border-bottom: 4px solid var(--amber);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 72px;
+}
+
+/* Logo sits top-left and links back to the Home page. */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.nav__logo img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.nav__logo:hover img { transform: rotate(-8deg) scale(1.08); }
+
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.nav__wordmark span {
+  display: block;
+  font-family: var(--font-data);
+  font-weight: 400;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  display: block;
+  padding: 10px 14px;
+  color: #cdd7de;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Mouse-over (hover) effect */
+.nav__link:hover {
+  color: #fff;
+  border-bottom-color: var(--amber);
+}
+
+/* Current page indicator. aria-current="page" is set in the
+   HTML of each page, so screen readers get the same signal. */
+.nav__link[aria-current="page"] {
+  color: var(--ink);
+  background: var(--amber);
+  border-bottom-color: var(--amber-deep);
+  font-weight: 600;
+}
+
+/* ---------- 5. Hero + energy scale ------------------------- */
+.hero {
+  background: var(--card);
+  border-bottom: 1px solid var(--rule);
+  padding: 64px 0 48px;
+}
+
+.hero__lead {
+  font-size: 1.12rem;
+  max-width: 58ch;
+  color: var(--ink-soft);
+}
+
+/* Signature element: a running "energy scale" strip modelled on
+   the tick marks of a household electricity meter. */
+.scale {
+  margin-top: 40px;
+  border-top: 2px solid var(--ink);
+  padding-top: 14px;
+}
+
+.scale__ticks {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 84px;
+}
+
+.scale__tick {
+  flex: 1;
+  background: var(--rule);
+  border-radius: 1px 1px 0 0;
+}
+
+.scale__tick--low  { background: var(--teal); }
+.scale__tick--mid  { background: var(--amber); }
+.scale__tick--high { background: var(--red); }
+
+.scale__legend {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+/* ---------- 6. Cards, tables, FAQ -------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.card__figure {
+  font-family: var(--font-data);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--amber-deep);
+  display: block;
+  line-height: 1.2;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  font-size: 0.95rem;
+}
+
+.data-table caption {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  padding-bottom: 10px;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid var(--rule);
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.data-table thead th {
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.data-table td.num {
+  font-family: var(--font-data);
+  text-align: right;
+}
+
+/* ============================================================
+   STORY TABS
+   Append to the end of assets/css/styles.css
+   ============================================================ */
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin: 2.5rem 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.9rem 1.25rem 0.8rem;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.5;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.tab:hover {
+  opacity: 0.8;
+}
+
+.tab[aria-selected="true"] {
+  opacity: 1;
+  border-bottom-color: currentColor;
+}
+
+.tab:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tab__label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tab__sub {
+  font-family: "Archivo", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+/* Panels are shown and hidden by the hidden attribute in site.js.
+   This guards against a stylesheet rule overriding it. */
+.tab-panel[hidden] {
+  display: none;
+}
+
+.tab-panel:focus {
+  outline: none;
+}
+
+@media (max-width: 40rem) {
+  .tabs {
+    gap: 0;
+  }
+
+  .tab {
+    padding: 0.75rem 0.75rem 0.7rem;
+  }
+
+  .tab__sub {
+    font-size: 0.92rem;
+  }
+}
+
+
+
+.data-table tbody tr:hover { background: #f7f9fa; }
+
+/* Small button used in the TV table to send a wattage to the
+   calculator on the Home page. */
+.mini-btn {
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  background: #fdf0d5;
+  border: 1px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 5px 9px;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.mini-btn:hover { background: var(--amber); }
+
+/* FAQ accordion --------------------------------------------- */
+.faq { max-width: 760px; }
+
+.faq__item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: none;
+  border: 0;
+  padding: 18px 0;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq__question:hover { color: var(--amber-deep); }
+
+/* The +/- marker rotates when the panel opens. */
+.faq__marker {
+  font-family: var(--font-data);
+  font-size: 1.3rem;
+  color: var(--amber-deep);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.faq__question[aria-expanded="true"] .faq__marker {
+  transform: rotate(45deg);
+}
+
+/* Hidden by default; JavaScript toggles the [hidden] attribute. */
+.faq__answer {
+  padding: 0 0 18px 32px;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.faq__answer[hidden] { display: none; }
+
+/* ---------- 7. Calculator ---------------------------------- */
+.calc {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.calc__form {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+
+.field__hint {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  font-family: var(--font-data);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+}
+
+/* Error state, added by JavaScript when validation fails. */
+.field input.is-invalid,
+.field select.is-invalid {
+  border-color: var(--red);
+  background: #fdf3f1;
+}
+
+.field__error {
+  display: block;
+  min-height: 1.2em;
+  font-size: 0.82rem;
+  color: var(--red);
+  margin-top: 4px;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  background: var(--amber);
+  color: var(--ink);
+  border: 0;
+  border-radius: var(--radius);
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn:hover { background: var(--amber-deep); color: #fff; }
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--rule);
+  margin-left: 8px;
+}
+
+.btn--ghost:hover { background: var(--rule); color: var(--ink); }
+
+/* Results panel styled like a meter read-out. */
+.readout {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.readout h3 {
+  color: #fff;
+  border-bottom: 1px solid #2c4256;
+  padding-bottom: 12px;
+}
+
+.readout__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px dashed #2c4256;
+}
+
+.readout__label {
+  font-size: 0.88rem;
+  color: #a9bcca;
+}
+
+.readout__value {
+  font-family: var(--font-data);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.readout__value--big { font-size: 1.75rem; }
+
+.readout__empty {
+  font-size: 0.9rem;
+  color: #a9bcca;
+}
+
+/* ---------- 8. Footer -------------------------------------- */
+.site-footer {
+  background: var(--ink);
+  color: #a9bcca;
+  border-top: 4px solid var(--amber);
+  padding: 32px 0;
+  font-size: 0.88rem;
+  margin-top: 24px;
+}
+
+.site-footer strong { color: #fff; }
+
+.site-footer p { margin: 0 0 6px; }
+
+.site-footer a { color: var(--amber); }
+
+/* ---------- 9. Responsive ---------------------------------- */
+@media (max-width: 840px) {
+  .grid { grid-template-columns: 1fr; }
+  .calc { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .nav {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+  .nav__links { width: 100%; }
+  .nav__link { padding: 8px 10px; font-size: 0.88rem; }
+  .scale__ticks { height: 60px; }
+  .table-scroll { overflow-x: auto; }
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+/* ============================================================
+   APPEND THIS TO THE END OF assets/css/styles.css
+   Styles for the Exercise 3 data story page.
+   ============================================================ */
+
+/* Body copy in the story is set narrower than the page. Long
+   lines are hard to track with the eye; roughly 65 characters
+   per line is comfortable for sustained reading. */
+.story__text {
+  max-width: 62ch;
+  font-size: 1.05rem;
+}
+
+/* Chart figures ------------------------------------------- */
+.figure {
+  margin: 32px 0;
+  padding: 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  max-width: 860px;
+  height: auto;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.figure figcaption {
+  font-family: var(--font-data);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 860px;
+  margin-top: 10px;
+  padding-left: 12px;
+  border-left: 3px solid var(--amber);
+}
+
+/* The single number the reader should leave with ----------- */
+.takeaway {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: var(--ink);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-top: 32px;
+}
+
+.takeaway__figure {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  line-height: 1;
+  color: var(--amber);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.takeaway__text {
+  color: #cdd7de;
+  margin: 0;
+  max-width: 46ch;
+}
+
+@media (max-width: 620px) {
+  .takeaway {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 24px;
+  }
+}

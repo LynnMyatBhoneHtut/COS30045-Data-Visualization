@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Appliance Energy Consumption</title>
+  <meta name="description" content="Placeholder site about household appliance energy consumption in the Australian market.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION (same on all three pages) ============ -->
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <!-- Logo links back to the Home page -->
+      <a class="nav__logo" href="index.html">
+        <img src="assets/img/PowerIcon.png" alt="Appliance Energy Consumption home">
+        <span class="nav__wordmark">
+          Appliance Energy
+          <span>Consumption AU</span>
+        </span>
+      </a>
+      <ul class="nav__links">
+        <!-- aria-current marks the active page; CSS styles it -->
+        <li><a class="nav__link" href="./index.html" aria-current="page">Home</a></li>
+        <li><a class="nav__link" href="./televisions.html">Televisions</a></li>
+        <li><a class="nav__link" href="./about.html">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Australian household energy</p>
+        <h1>What your appliances actually cost to run.</h1>
+        <p class="hero__lead">
+          Appliances are the part of a power bill households have the most
+          direct control over, yet the running cost of a device is rarely
+          visible at the point of purchase. This site brings power ratings,
+          typical usage patterns and electricity prices together so the
+          yearly cost of an appliance is easy to see before you buy it.
+        </p>
+
+        <!-- Signature element: a meter-style scale showing where common
+             appliances sit relative to each other. -->
+        <div class="scale" aria-hidden="true">
+          <div class="scale__ticks">
+            <div class="scale__tick scale__tick--low"  style="height: 14%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 22%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 31%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 44%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 52%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 61%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 78%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 90%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 100%"></div>
+          </div>
+          <p class="scale__legend">
+            <span>Standby &amp; small devices</span>
+            <span>Everyday appliances</span>
+            <span>Heating &amp; cooling</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PLACEHOLDER CONTENT ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Where the power goes</p>
+        <h2>Three things worth knowing</h2>
+
+        <div class="grid">
+          <article class="card">
+            <span class="card__figure">40%</span>
+            <h3>Heating and cooling</h3>
+            <p>
+              Placeholder text. Climate control is usually the single largest
+              share of a household's electricity use, and the share varies
+              widely between Hobart and Darwin.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure">24/7</span>
+            <h3>Always-on loads</h3>
+            <p>
+              Placeholder text. Refrigeration runs continuously, so even a
+              modest power rating adds up to a meaningful annual figure once
+              it is multiplied across a full year.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure">6&nbsp;stars</span>
+            <h3>The rating label</h3>
+            <p>
+              Placeholder text. Star ratings compare appliances of a similar
+              size and type. More stars means less energy used to deliver the
+              same result.
+            </p>
+          </article>
+        </div>
+
+        <p class="note" style="margin-top: 22px;">
+          Placeholder figures only. Replace these with values from the
+          Exercise&nbsp;1 data set.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ CALCULATOR ============ -->
+    <section class="section" id="calculator">
+      <div class="wrap">
+        <p class="eyebrow">Interactive tool</p>
+        <h2>Appliance energy calculator</h2>
+        <p style="max-width: 60ch;">
+          Enter a power rating, how long the appliance runs each day, and
+          your electricity price. The results update as you type.
+        </p>
+
+        <div class="calc">
+
+          <!-- Inputs -->
+          <form class="calc__form" id="calc-form" novalidate>
+            <div class="field">
+              <label for="appliance">
+                Appliance
+                <span class="field__hint">Picking one fills in a typical power rating.</span>
+              </label>
+              <select id="appliance" name="appliance">
+                <option value="">Custom — I'll enter my own watts</option>
+                <option value="tv-led-55">55" LED television</option>
+                <option value="tv-oled-65">65" OLED television</option>
+                <option value="fridge">Fridge–freezer</option>
+                <option value="washing-machine">Washing machine</option>
+                <option value="aircon">Split-system air conditioner</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="watts">
+                Power rating
+                <span class="field__hint">In watts, from the appliance label.</span>
+              </label>
+              <input type="number" id="watts" name="watts" min="1" max="10000" step="1" value="120" inputmode="numeric">
+              <span class="field__error" id="watts-error" role="alert"></span>
+            </div>
+
+            <div class="field">
+              <label for="hours">
+                Hours of use per day
+                <span class="field__hint">Between 0 and 24.</span>
+              </label>
+              <input type="number" id="hours" name="hours" min="0" max="24" step="0.5" value="4" inputmode="decimal">
+              <span class="field__error" id="hours-error" role="alert"></span>
+            </div>
+
+            <div class="field">
+              <label for="price">
+                Electricity price
+                <span class="field__hint">In cents per kWh — check your bill.</span>
+              </label>
+              <input type="number" id="price" name="price" min="1" max="200" step="0.1" value="32" inputmode="decimal">
+              <span class="field__error" id="price-error" role="alert"></span>
+            </div>
+
+            <button class="btn" type="submit">Calculate</button>
+            <button class="btn btn--ghost" type="button" id="calc-reset">Reset</button>
+          </form>
+
+          <!-- Results panel. JavaScript updates these values in place. -->
+          <div class="readout" id="results" aria-live="polite">
+            <h3>Estimated use</h3>
+
+            <p class="readout__empty" id="results-empty">
+              Fill in all three fields to see an estimate.
+            </p>
+
+            <div id="results-list" hidden>
+              <div class="readout__row">
+                <span class="readout__label">Daily energy</span>
+                <span class="readout__value" id="out-daily">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Monthly energy</span>
+                <span class="readout__value" id="out-monthly">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Yearly energy</span>
+                <span class="readout__value" id="out-yearly">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Cost per month</span>
+                <span class="readout__value" id="out-cost-month">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Cost per year</span>
+                <span class="readout__value readout__value--big" id="out-cost-year">—</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ACCORDION ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Common questions</p>
+        <h2>FAQ</h2>
+
+        <div class="faq">
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-1" id="faq-btn-1">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              What is a kilowatt-hour?
+            </button>
+            <div class="faq__answer" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" hidden>
+              <p>
+                Placeholder answer. A kilowatt-hour is the amount of energy
+                used by a 1000 watt appliance running for one hour. It is the
+                unit retailers bill you in.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Where do I find my electricity price?
+            </button>
+            <div class="faq__answer" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
+              <p>
+                Placeholder answer. The usage rate appears on your bill in
+                cents per kilowatt-hour, separately from the daily supply
+                charge.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Does standby power matter?
+            </button>
+            <div class="faq__answer" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
+              <p>
+                Placeholder answer. Individual standby loads are small, but
+                they run continuously and there are usually a lot of them in
+                one home.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              How accurate are these estimates?
+            </button>
+            <div class="faq__answer" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
+              <p>
+                Placeholder answer. The calculator assumes the appliance draws
+                its rated power the whole time it is on, which is a
+                simplification for devices that cycle on and off.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (same on all three pages) ============ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="current-year">2026</span> <strong>Lynn Myat</strong> — Appliance Energy Consumption Website.</p>
+      <p>Built for COS30045 Data Visualisation, Swinburne University of Technology.</p>
+
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/faq.js"></script>
+  <script src="assets/js/calculator.js"></script>
+</body>
+</html>
