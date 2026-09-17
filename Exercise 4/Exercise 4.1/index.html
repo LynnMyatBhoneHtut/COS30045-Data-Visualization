@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercise 4.1 — SVG House: Before &amp; After Customisation</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 2rem;
+      background: #f4f4f4;
+      color: #222;
+      line-height: 1.5;
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.15rem; margin: 0 0 .5rem; }
+    p  { max-width: 760px; }
+
+    /* Two panels side by side, stacking on narrow screens */
+    .compare {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .panel {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+      flex: 1 1 320px;
+      text-align: center;
+    }
+    .panel .tag {
+      display: inline-block;
+      font-size: .8rem;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .tag.before { background: #e0e0e0; color: #333; }
+    .tag.after  { background: #ffe0b3; color: #7a4a00; }
+    svg { width: 100%; height: auto; max-width: 360px; }
+
+    /* Comparison table */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+      background: #fff;
+      margin-top: 1rem;
+      font-size: .92rem;
+    }
+    caption {
+      text-align: left;
+      font-weight: bold;
+      margin-bottom: .5rem;
+      font-size: 1.05rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #333; color: #fff; }
+    tbody tr:nth-child(even) { background: #f7f7f7; }
+    .swatch {
+      display: inline-block;
+      width: 12px; height: 12px;
+      border: 1px solid #888;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+    code { background: #eee; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Exercise 4.1 — Customising the SVG House (Before &amp; After)</h1>
+  <p>
+    The left panel is the <strong>original</strong> house from Step 1. The right
+    panel is the <strong>customised</strong> version. Changes include moving
+    components (the sun and the tree), changing fill colours (sky, roof, door),
+    adding a stroke to the house, and adding new items (sun rays and a bush).
+    Every change is listed in the table below.
+  </p>
+
+  <div class="compare">
+    <!-- ============================================================= -->
+    <!-- ORIGINAL                                                       -->
+    <!-- ============================================================= -->
+    <div class="panel">
+      <span class="tag before">BEFORE — Original</span>
+      <h2>Original house</h2>
+      <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
+        <!-- sky : light blue -->
+        <rect x="0" y="0" width="600" height="300" fill="#87CEEB" />
+        <!-- ground -->
+        <rect x="0" y="300" width="600" height="220" fill="#2E8B2E" />
+        <!-- sun : yellow, TOP-RIGHT -->
+        <circle cx="515" cy="85" r="45" fill="#FFD500" />
+        <!-- tree : LEFT side -->
+        <line x1="110" y1="250" x2="110" y2="365" stroke="#6B4226" stroke-width="18" />
+        <ellipse cx="110" cy="240" rx="60" ry="50" fill="#228B22" />
+        <!-- house body : NO stroke -->
+        <rect x="205" y="250" width="230" height="170" fill="#8B5A2B" />
+        <!-- chimney -->
+        <rect x="398" y="160" width="28" height="80" fill="#6B4226" />
+        <!-- roof : sienna -->
+        <polygon points="185,250 320,150 455,250" fill="#A0522D" />
+        <!-- smoke -->
+        <polyline points="412,160 404,140 420,120 408,100 418,80"
+                  fill="none" stroke="#B0B0B0" stroke-width="6" stroke-linecap="round" />
+        <!-- garden path : narrow -->
+        <path d="M 308,420 Q 296,470 302,520 L 343,520 Q 352,470 338,420 Z" fill="#D2B48C" />
+        <!-- door : brown -->
+        <rect x="295" y="330" width="55" height="90" fill="#5C3317" />
+        <circle cx="340" cy="378" r="4" fill="#FFD700" />
+        <!-- windows group : brown frames, y=285 -->
+        <g fill="#ADD8E6" stroke="#5C3317" stroke-width="3">
+          <g transform="translate(250, 285)">
+            <rect x="0" y="0" width="45" height="45" />
+            <line x1="22.5" y1="0" x2="22.5" y2="45" />
+            <line x1="0" y1="22.5" x2="45" y2="22.5" />
+          </g>
+          <g transform="translate(345, 285)">
+            <rect x="0" y="0" width="45" height="45" />
+            <line x1="22.5" y1="0" x2="22.5" y2="45" />
+            <line x1="0" y1="22.5" x2="45" y2="22.5" />
+          </g>
+        </g>
+        <!-- label -->
+        <text x="300" y="505" text-anchor="middle" font-size="26"
+              font-weight="bold" fill="#111">My House</text>
+      </svg>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- CUSTOMISED                                                     -->
+    <!-- ============================================================= -->
+    <div class="panel">
+      <span class="tag after">AFTER — Customised</span>
+      <h2>Customised house</h2>
+      <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
+        <!-- sky : CHANGED to sunset orange -->
+        <rect x="0" y="0" width="600" height="300" fill="#FDB24C" />
+        <!-- ground -->
+        <rect x="0" y="300" width="600" height="220" fill="#2E8B2E" />
+        <!-- sun : MOVED to top-left + CHANGED to orange -->
+        <circle cx="150" cy="110" r="45" fill="#FF7A00" />
+        <!-- sun rays : ADDED (new lines) -->
+        <line x1="150" y1="40"  x2="150" y2="62"  stroke="#FF7A00" stroke-width="4" />
+        <line x1="150" y1="158" x2="150" y2="180" stroke="#FF7A00" stroke-width="4" />
+        <line x1="80"  y1="110" x2="102" y2="110" stroke="#FF7A00" stroke-width="4" />
+        <line x1="198" y1="110" x2="220" y2="110" stroke="#FF7A00" stroke-width="4" />
+        <line x1="102" y1="62"  x2="118" y2="78"  stroke="#FF7A00" stroke-width="4" />
+        <line x1="182" y1="142" x2="198" y2="158" stroke="#FF7A00" stroke-width="4" />
+        <line x1="198" y1="62"  x2="182" y2="78"  stroke="#FF7A00" stroke-width="4" />
+        <line x1="118" y1="142" x2="102" y2="158" stroke="#FF7A00" stroke-width="4" />
+        <!-- tree : MOVED to the RIGHT + darker green -->
+        <line x1="500" y1="250" x2="500" y2="365" stroke="#6B4226" stroke-width="18" />
+        <ellipse cx="500" cy="240" rx="60" ry="50" fill="#1F7A1F" />
+        <!-- bush : ADDED (new ellipse, bottom-left) -->
+        <ellipse cx="115" cy="445" rx="55" ry="28" fill="#2FA02F" />
+        <!-- house body : STROKE ADDED (dark outline) -->
+        <rect x="205" y="250" width="230" height="170"
+              fill="#8B5A2B" stroke="#3E2611" stroke-width="4" />
+        <!-- chimney -->
+        <rect x="398" y="160" width="28" height="80" fill="#6B4226" />
+        <!-- roof : CHANGED to dark red -->
+        <polygon points="185,250 320,150 455,250" fill="#7A2E1E" />
+        <!-- smoke -->
+        <polyline points="412,160 404,140 420,120 408,100 418,80"
+                  fill="none" stroke="#C8C8C8" stroke-width="6" stroke-linecap="round" />
+        <!-- garden path : WIDENED + recoloured -->
+        <path d="M 305,420 Q 255,465 245,520 L 400,520 Q 372,465 340,420 Z" fill="#C8A24B" />
+        <!-- door : CHANGED to blue -->
+        <rect x="295" y="330" width="55" height="90" fill="#3E5F82" />
+        <circle cx="340" cy="378" r="4" fill="#FFD700" />
+        <!-- windows group : frame CHANGED to navy + MOVED down (translate y 285 -> 290) -->
+        <g fill="#CDE8F5" stroke="#1B3A5C" stroke-width="3">
+          <g transform="translate(250, 290)">
+            <rect x="0" y="0" width="45" height="45" />
+            <line x1="22.5" y1="0" x2="22.5" y2="45" />
+            <line x1="0" y1="22.5" x2="45" y2="22.5" />
+          </g>
+          <g transform="translate(345, 290)">
+            <rect x="0" y="0" width="45" height="45" />
+            <line x1="22.5" y1="0" x2="22.5" y2="45" />
+            <line x1="0" y1="22.5" x2="45" y2="22.5" />
+          </g>
+        </g>
+        <!-- label : CHANGED text + colour -->
+        <text x="300" y="505" text-anchor="middle" font-size="26"
+              font-weight="bold" fill="#ffffff">Sunset Cottage</text>
+      </svg>
+    </div>
+  </div>
+
+  <div>
+    <h1>
+        the customised house with coordinate callouts on every changed component, showing its exact position/size after the change
+  </h1>
+    <img src="./house_annotated.png" alt="">
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- COMPARISON TABLE                                               -->
+  <!-- ============================================================= -->
+  <table>
+    <caption>Table 1 — Summary of changes (before &rarr; after)</caption>
+    <thead>
+      <tr>
+        <th>Element</th>
+        <th>Before</th>
+        <th>After</th>
+        <th>Type of change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sky <code>&lt;rect&gt;</code></td>
+        <td><span class="swatch" style="background:#87CEEB"></span>#87CEEB light blue</td>
+        <td><span class="swatch" style="background:#FDB24C"></span>#FDB24C sunset orange</td>
+        <td>Changed fill colour</td>
+      </tr>
+      <tr>
+        <td>Sun <code>&lt;circle&gt;</code></td>
+        <td>cx=515, cy=85 &middot; <span class="swatch" style="background:#FFD500"></span>yellow</td>
+        <td>cx=150, cy=110 &middot; <span class="swatch" style="background:#FF7A00"></span>orange</td>
+        <td>Moved + changed fill colour</td>
+      </tr>
+      <tr>
+        <td>Sun rays <code>&lt;line&gt;</code></td>
+        <td>None</td>
+        <td>8 rays around the sun</td>
+        <td>Added new items (strokes)</td>
+      </tr>
+      <tr>
+        <td>Tree <code>&lt;line&gt;</code> + <code>&lt;ellipse&gt;</code></td>
+        <td>x=110 (left) &middot; <span class="swatch" style="background:#228B22"></span>#228B22</td>
+        <td>x=500 (right) &middot; <span class="swatch" style="background:#1F7A1F"></span>#1F7A1F</td>
+        <td>Moved + changed fill colour</td>
+      </tr>
+      <tr>
+        <td>Bush <code>&lt;ellipse&gt;</code></td>
+        <td>None</td>
+        <td>cx=115, cy=445, green</td>
+        <td>Added new item</td>
+      </tr>
+      <tr>
+        <td>House body <code>&lt;rect&gt;</code></td>
+        <td>No stroke</td>
+        <td>stroke #3E2611, width 4</td>
+        <td>Added stroke</td>
+      </tr>
+      <tr>
+        <td>Roof <code>&lt;polygon&gt;</code></td>
+        <td><span class="swatch" style="background:#A0522D"></span>#A0522D sienna</td>
+        <td><span class="swatch" style="background:#7A2E1E"></span>#7A2E1E dark red</td>
+        <td>Changed fill colour</td>
+      </tr>
+      <tr>
+        <td>Door <code>&lt;rect&gt;</code></td>
+        <td><span class="swatch" style="background:#5C3317"></span>#5C3317 brown</td>
+        <td><span class="swatch" style="background:#3E5F82"></span>#3E5F82 blue</td>
+        <td>Changed fill colour</td>
+      </tr>
+      <tr>
+        <td>Garden path <code>&lt;path&gt;</code></td>
+        <td>Narrow, <span class="swatch" style="background:#D2B48C"></span>#D2B48C</td>
+        <td>Widened curve, <span class="swatch" style="background:#C8A24B"></span>#C8A24B</td>
+        <td>Reshaped + changed fill colour</td>
+      </tr>
+      <tr>
+        <td>Windows group <code>&lt;g&gt;</code></td>
+        <td>frame #5C3317 &middot; translate(_, 285)</td>
+        <td>frame #1B3A5C &middot; translate(_, 290)</td>
+        <td>Changed stroke + moved (translate)</td>
+      </tr>
+      <tr>
+        <td>Label <code>&lt;text&gt;</code></td>
+        <td>"My House", #111</td>
+        <td>"Sunset Cottage", #fff</td>
+        <td>Changed content + fill colour</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
