@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Energy Consumption</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <h1>Energy Consumption</h1>
+        <p>Understanding the energy use of household televisions in Australia.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>TV Models by Brand</h2>
+            <p>
+                The chart below is built with D3 from the
+                <code>tvBrandCount.csv</code> data set, which counts how many
+                available TV models each brand sells in Australia.
+            </p>
+
+            <!-- Exercise 4.3: D3 creates the <svg> inside this container -->
+            <div class="responsive-svg-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>COS30045 Data Visualisation &middot; Exercises 4.3 &amp; 4.4</p>
+    </footer>
+
+    <!-- Load the D3 library FIRST, then your own D3 code -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
