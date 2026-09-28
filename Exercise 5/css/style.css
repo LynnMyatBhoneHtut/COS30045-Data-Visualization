@@ -1,0 +1,105 @@
+/* ---- Basic page styling ---- */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: #222;
+    line-height: 1.5;
+}
+
+header,
+main,
+footer {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 0.25rem;
+}
+
+code {
+    background: #eee;
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+footer {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+    margin-top: 2rem;
+}
+
+/* ---- Exercise 4.3: responsive container for the D3 SVG ---- */
+/* Centres the canvas and lets it resize relative to its parent. */
+.responsive-svg-container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* ---- Exercise 5: chart styles ---- */
+
+/* Bar chart styles */
+.bar {
+    fill: green;
+}
+
+.bar-label {
+    font-size: 14px;
+    fill: #000;
+}
+
+.axis-label {
+    font-size: 18px;
+    fill: #000;
+}
+
+/* Line chart styles */
+.line {
+    stroke-width: 1.5px;
+}
+
+.line-label {
+    font-size: 15px;
+}
+
+/* Donut chart styles */
+.slice-label {
+    font-size: 15px;
+    fill: #000;
+}
+
+/* Scatter plot and technology donut styles */
+.legend-label {
+    font-size: 15px;
+    fill: #000;
+}
+
+.donut-total {
+    font-size: 30px;
+    font-weight: bold;
+    fill: #222;
+}
+
+.donut-total-label {
+    font-size: 15px;
+    fill: #555;
+}
+
+#bar-chart .x-axis text {
+    font-size: 16px;
+}
+
+.x-axis text,
+.y-axis text {
+    font-size: 11px;
+}
