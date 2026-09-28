@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Televisions | Appliance Energy Consumption</title>
+  <meta name="description" content="Placeholder comparison of television power ratings and running costs.">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <a class="nav__logo" href="index.html">
+        <img src="PowerIcon.png" alt="Appliance Energy Consumption home">
+        <span class="nav__wordmark">
+          Appliance Energy
+          <span>Consumption AU</span>
+        </span>
+      </a>
+      <ul class="nav__links">
+        <li><a class="nav__link" href="index.html">Home</a></li>
+        <li><a class="nav__link" href="televisions.html" aria-current="page">Televisions</a></li>
+        <li><a class="nav__link" href="about.html">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Category profile</p>
+        <h1>Televisions</h1>
+        <p class="hero__lead">
+          Screen size and panel technology drive most of the difference in
+          television power use. A larger panel needs more light output, and
+          brightness is where most of the energy goes. The table below
+          compares placeholder models on the same basis: rated power, hours
+          watched per day, and estimated cost over a year.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Placeholder data</p>
+        <h2>Model comparison</h2>
+
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>
+              Estimated running costs assume 4 hours of viewing per day at
+              32c per kWh. Figures are placeholders for demonstration.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Screen</th>
+                <th scope="col">Panel</th>
+                <th scope="col">Power (W)</th>
+                <th scope="col">Yearly (kWh)</th>
+                <th scope="col">Yearly cost</th>
+                <th scope="col"><span class="sr-only">Calculator</span>Try it</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Aurora 43S</th>
+                <td>43"</td>
+                <td>LED</td>
+                <td class="num">65</td>
+                <td class="num">95</td>
+                <td class="num">$30.40</td>
+                <td><a class="mini-btn" href="index.html?watts=65#calculator">Calculate</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Aurora 55S</th>
+                <td>55"</td>
+                <td>LED</td>
+                <td class="num">120</td>
+                <td class="num">175</td>
+                <td class="num">$56.06</td>
+                <td><a class="mini-btn" href="index.html?watts=120#calculator">Calculate</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Meridian 55Q</th>
+                <td>55"</td>
+                <td>QLED</td>
+                <td class="num">145</td>
+                <td class="num">212</td>
+                <td class="num">$67.74</td>
+                <td><a class="mini-btn" href="index.html?watts=145#calculator">Calculate</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Meridian 65O</th>
+                <td>65"</td>
+                <td>OLED</td>
+                <td class="num">180</td>
+                <td class="num">263</td>
+                <td class="num">$84.10</td>
+                <td><a class="mini-btn" href="index.html?watts=180#calculator">Calculate</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Vantage 75U</th>
+                <td>75"</td>
+                <td>Mini-LED</td>
+                <td class="num">240</td>
+                <td class="num">350</td>
+                <td class="num">$112.13</td>
+                <td><a class="mini-btn" href="index.html?watts=240#calculator">Calculate</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="note" style="margin-top: 22px;">
+          Model names and figures are invented placeholders. Swap in the
+          Exercise&nbsp;1 data set when it becomes available.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap">
+        <h2>Reading the numbers</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Rated power is a ceiling</h3>
+            <p>
+              Placeholder text. A television rarely draws its full rated
+              power. Bright scenes and high brightness settings push it
+              closer to the maximum.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Standby adds up</h3>
+            <p>
+              Placeholder text. A set left in standby for twenty hours a day
+              still draws a small continuous load across the whole year.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Settings matter</h3>
+            <p>
+              Placeholder text. Store display modes are tuned for showroom
+              lighting and use noticeably more power than home viewing modes.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="current-year">2026</span> <strong>Lynn Myat</strong> — Appliance Energy Consumption Website.</p>
+      <p>Built for COS30045 Data Visualisation, Swinburne University of Technology.</p>
+
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
