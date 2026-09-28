@@ -6,9 +6,9 @@ A small three-page website demonstrating HTML structure, external CSS styling
 and vanilla JavaScript interactivity. It will be extended with D3.js
 visualisations in the Week 3 and Week 4 exercises.
 
-**Author:** *Your Name Here*
-**Student ID:** *Your ID Here*
-**Repository:** *paste your GitHub repo URL here*
+**Author:** *Lynn Myat Bhone Htut*
+**Student ID:** *105973835*
+**Repository:** **
 
 ---
 
@@ -75,8 +75,7 @@ serve the folder:
 python3 -m http.server 8000
 ```
 
-Then visit <http://localhost:8000>.
-
+Then visit 
 ## Before you submit
 
 - [ ] Replace `assets/img/PowerIcon.png` with the logo supplied in the unit materials
@@ -93,29 +92,7 @@ declare AI use and to reflect critically on it.*
 
 Suggested structure:
 
-- **Tool used:** which assistant, and which version
-- **What it was used for:** e.g. initial page scaffolding, CSS layout, the
-  accordion and calculator logic
+- **Tool used:**ChatGPT 3.0
+- **What it was used for:** Generate SVG , content and Logo calculator logic
 - **What you changed:** the parts you rewrote, simplified or corrected yourself
-- **What you learned:** something you understand now that you did not before
-- **Limitations you noticed:** where the generated code was wrong, over-complex,
-  or needed adjusting to meet the brief
-
-## Suggested commit sequence
-
-The exercise asks for regular, meaningful commits — not one large upload.
-
-```
-1.  Add project structure and README
-2.  Add Home page skeleton and navigation
-3.  Add external stylesheet and logo colours
-4.  Add Televisions page and comparison table
-5.  Add About Us page
-6.  Add footer with dynamic year
-7.  Add FAQ accordion with JavaScript
-8.  Add appliance energy calculator
-9.  Add input validation and error messages
-10. Improve responsive layout for small screens
-```
-
-Write commit messages in the imperative mood, describing what the commit does.
+- **What you learned:** JavaScript Logic aboutcalculator 
