@@ -1,0 +1,85 @@
+/* ---------- General page styles ---------- */
+body {
+    margin: 0;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    color: #5c3d2e;
+    background-color: #fffaf0; /* matches bodyBackgroundColor in shared-constants.js */
+    line-height: 1.5;
+}
+
+header {
+    background-color: #d2691e;
+    padding: 1rem 2rem;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #5c3d2e;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 1.5rem 0 0.25rem;
+}
+
+h3 {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-top: 0.25rem;
+}
+
+a {
+    color: #1a0dab;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 1rem;
+    border-top: 1px solid #e5d8c3;
+}
+
+/* ---------- Filter buttons (Exercise 6.2) ---------- */
+#filters_screen {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.filter {
+    min-width: 80px;
+    padding: 6px 16px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: #d2691e;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.filter:hover {
+    background-color: #b85a17;
+}
+
+/* the button that is currently selected */
+.filter.active {
+    background-color: #ffcc80;
+    color: #fff;
+}

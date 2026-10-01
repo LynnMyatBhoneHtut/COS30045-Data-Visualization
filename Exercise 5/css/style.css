@@ -78,23 +78,6 @@ footer {
     fill: #000;
 }
 
-/* Scatter plot and technology donut styles */
-.legend-label {
-    font-size: 15px;
-    fill: #000;
-}
-
-.donut-total {
-    font-size: 30px;
-    font-weight: bold;
-    fill: #222;
-}
-
-.donut-total-label {
-    font-size: 15px;
-    fill: #555;
-}
-
 #bar-chart .x-axis text {
     font-size: 16px;
 }

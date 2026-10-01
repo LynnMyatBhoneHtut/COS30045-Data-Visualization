@@ -1,0 +1,52 @@
+/* ---------- Styles shared by both visualisations ---------- */
+
+/* Responsive SVG: the chart scales to the width of its container */
+.responsive-svg-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 0 1rem;
+}
+
+.responsive-svg-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #fffaf0;
+}
+
+/* Axis tick labels and lines */
+.responsive-svg-container .tick text {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 11px;
+    fill: #5c3d2e;
+}
+
+.responsive-svg-container .domain,
+.responsive-svg-container .tick line {
+    stroke: #5c3d2e;
+}
+
+/* Axis labels */
+.axis-label {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    fill: #5c3d2e;
+}
+
+/* Scatterplot legend labels */
+.legend-label {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    fill: #222;
+}
+
+/* Tooltip text (Exercise 6.4) */
+.tooltip text {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+}
+
+/* Let the mouse pass through the tooltip so it never blocks the circles */
+.tooltip {
+    pointer-events: none;
+}
