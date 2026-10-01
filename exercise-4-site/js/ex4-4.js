@@ -10,7 +10,7 @@
 //   2. Draws into its own container, #chart-4-4.
 //   3. Theme styling: the debug border becomes .chart-canvas.
 // The values this file logs to the console are also shown on the
-// page, in the "Console output" read-out (assets/js/hub-readouts.js).
+// page, in the "Console output" read-out (assets/js/console-readout.js).
 // ============================================================
 
 (function () {   // HUB: private scope for this exercise

@@ -543,178 +543,103 @@ select:focus-visible {
    ------------------------------------------------------------
    Everything above this comment is the Exercise 0.2 stylesheet
    (energy-webpage-v1/styles.css), cloned without any changes.
-   Everything below adds what the D3 exercise hubs need. It only
-   uses the tokens from section 1 (plus the chart tokens in
-   section 10), so the charts read as part of the same site.
+   Everything below is added so the exercise charts sit inside
+   that site's design. It only uses the tokens from section 1,
+   plus the chart colours in section 10.
 
    Sections:
-     10. Chart tokens
-     11. Exercise tabs (adapted from the Exercise 3 story tabs)
-     12. Exercise panels, chart cards and read-outs
-     13. SVG typography and axes
-     14. Exercise 6 controls: filters, legend, tooltip
-     15. Code excerpts and inline code
-     16. Data and about pages
-     17. Landing page
-     18. Responsive rules for the hub layer
+     10. Chart colours
+     11. Page layout: compact hero and one section per exercise
+     12. Chart cards
+     13. SVG text and axes
+     14. Exercise 6 filter buttons, legend and tooltip
+     15. Responsive rules for the hub layer
    ============================================================ */
 
-/* ---------- 10. Chart tokens -------------------------------
-   Single-series marks use --teal (or --ink-soft for the
-   Exercise 6 histogram, which shows every screen type at once).
-   The two sets below were checked for colour-blind separation
-   (protanopia and deuteranopia) and for contrast against the
-   white card:
-     --series-*  three hues for unordered categories (LED/LCD/OLED)
-     --ramp-*    one teal, light to dark, for ordered categories
-                 (small < medium < large)
+/* ---------- 10. Chart colours ------------------------------
+   Single-series marks use --teal from section 1 (the Exercise 6
+   histogram uses --ink-soft, a neutral like its original grey).
    assets/js/theme.js reads these values, so the D3 code never
-   hard-codes a colour. Change a value here and the charts follow.
+   hard-codes a colour.
+     --series-*  three colours for LED / LCD / OLED (checked for
+                 colour-blind separation and contrast on white)
+     --ramp-*    one teal, light to dark, for small / medium / large
    ---------------------------------------------------------- */
 :root {
-  --series-1: #009894;   /* teal                         */
-  --series-2: #c07c00;   /* amber (same as --amber-deep) */
-  --series-3: #5b4fa8;   /* violet                       */
+  --series-1: #009894;   /* teal   */
+  --series-2: #c07c00;   /* amber  */
+  --series-3: #5b4fa8;   /* violet */
 
-  --ramp-1: #62b6b0;     /* light teal: small  */
-  --ramp-2: #0e7f7a;     /* mid teal:   medium */
-  --ramp-3: #0b5f5c;     /* dark teal:  large  */
+  --ramp-1: #62b6b0;     /* small  */
+  --ramp-2: #0e7f7a;     /* medium */
+  --ramp-3: #0b5f5c;     /* large  */
 
-  --canvas-edge: #9aabb5;   /* dashed outline that replaces the debug border */
-  --readout-muted: #a9bcca; /* same values the calculator read-out uses      */
-  --readout-rule: #2c4256;
+  --canvas-edge: #9aabb5; /* dashed outline that replaces the debug border */
 }
 
-/* Buttons styled as links, used on the landing page and in panels. */
-a.btn {
-  display: inline-block;
-  text-decoration: none;
+/* ---------- 11. Page layout -------------------------------- */
+
+/* A shorter hero than the Home page of Exercise 0.2, so the first
+   chart is on screen straight away. */
+.hero--compact { padding: 44px 0 36px; }
+
+.hero--compact .hero__lead { margin-bottom: 0; }
+
+/* One section per exercise. The sticky header is 76px tall, so a
+   link to #ex-5-2 stops just below it. */
+.exercise {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 76px;
 }
 
-a.mini-btn { display: inline-block; }
+.exercise:last-of-type { border-bottom: 0; }
 
-summary:focus-visible {
-  outline: 3px solid var(--amber);
-  outline-offset: 2px;
-}
-
-/* Spacing for a note under a grid or in the hero (the original
-   pages use an inline margin-top: 22px for the same job). */
-.note--spaced { margin-top: 22px; }
-
-/* ---------- 11. Exercise tabs ------------------------------
-   Same WAI-ARIA pattern as the Exercise 3 story tabs, restyled
-   to echo the navigation bar: the open tab carries the amber
-   underline, the rest sit back in --ink-soft.
-   ---------------------------------------------------------- */
-.tabs {
-  display: flex;
-  gap: 4px;
-  margin: 28px 0 0;
-  overflow-x: auto;
-  /* The strip's rule is drawn as an inset shadow so the open
-     tab's amber underline can sit on top of it without the
-     strip needing negative margins (which would make it scroll). */
-  box-shadow: inset 0 -1px 0 var(--rule);
-}
-
-.tab {
-  flex: 1 0 0;
-  min-width: 132px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 14px 16px 12px;
-  border: 0;
-  border-bottom: 3px solid transparent;
-  background: none;
-  font: inherit;
-  text-align: left;
-  color: var(--ink-soft);
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-}
-
-.tab:hover {
-  color: var(--ink);
-  background: var(--card);
-  border-bottom-color: var(--rule);
-}
-
-.tab[aria-selected="true"] {
-  color: var(--ink);
-  background: var(--card);
-  border-bottom-color: var(--amber);
-}
-
-.tab__label {
-  font-family: var(--font-data);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.tab__sub {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.02rem;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
-.tab-panel { padding-top: 32px; }
-
-/* Panels are shown and hidden with the hidden attribute in
-   tabs.js. This guards against another rule overriding it. */
-.tab-panel[hidden] { display: none; }
-
-.tab-panel:focus { outline: none; }
-
-.tab-panel:focus-visible {
-  outline: 3px solid var(--amber);
-  outline-offset: 6px;
-}
-
-/* The tabs section clears the sticky header when a link such
-   as index.html#ex-4-6 scrolls it into view. */
-.section--tabs { scroll-margin-top: 80px; }
-
-/* ---------- 12. Panels, chart cards and read-outs ---------- */
-.panel-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px 32px;
-}
-
-.panel-head__text {
-  flex: 1 1 520px;
+.exercise__text {
   max-width: 66ch;
+  margin-bottom: 24px;
 }
 
-.panel-head h3 {
-  font-size: 1.45rem;
-  margin-bottom: 0.4em;
-}
+.exercise__text p { color: var(--ink-soft); }
 
-.panel-head p { color: var(--ink-soft); }
-
-/* Chart beside its read-out, the same split as the calculator. */
-.viz {
+/* Exercise 4: text on the left, the tall canvas on the right. */
+.exercise__split {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 32px;
   align-items: start;
-  margin-top: 20px;
 }
 
-/* Wide charts (Exercises 5 and 6) take the full width and put
-   their read-out underneath, so the tick labels stay legible. */
-.viz--stack { grid-template-columns: minmax(0, 1fr); }
+.exercise__split .exercise__text { margin-bottom: 0; }
 
+code {
+  font-family: var(--font-data);
+  font-size: 0.88em;
+  background: #e4e9ec;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* The console values for Exercise 4.4 reuse the calculator's
+   read-out panel from section 7. */
+.readout--console { margin-top: 20px; }
+
+.readout--console h3 { font-size: 1rem; }
+
+.readout--console .readout__value { font-size: 1.05rem; }
+
+.readout__note {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #a9bcca;
+  margin: 14px 0 0;
+}
+
+/* A note with space above it: the Exercise 4.1 link under the
+   Exercise 4 intro, and the data source under the Exercise 6 charts. */
+.note--spaced { margin: 20px 0 0; }
+
+/* ---------- 12. Chart cards -------------------------------- */
 .chart-card {
   margin: 0;
   min-width: 0;
@@ -734,8 +659,8 @@ summary:focus-visible {
   border-left: 3px solid var(--amber);
 }
 
-/* The D3 containers. Every chart keeps its own viewBox, so the
-   SVG scales to whatever width its container allows. */
+/* Every chart keeps the viewBox its exercise code sets, so the SVG
+   scales to the width of its container. */
 .chart {
   width: 100%;
   margin: 0 auto;
@@ -747,87 +672,23 @@ summary:focus-visible {
   height: auto;
 }
 
-/* Exercises 4.3–4.5 draw on a tall 1200 x 1600 canvas and 4.6–4.7
-   on 500 x 600. Capping the width keeps them on screen without
-   changing the canvas the code asks for. */
-.chart--portrait { max-width: 440px; }
+/* Exercises 4.3–4.5 draw on a 1200 x 1600 canvas and 4.6–4.7 on
+   500 x 600; capping the width keeps them on screen. */
+.chart--portrait { max-width: 400px; }
 .chart--square   { max-width: 520px; }
 
-/* Exercise 4.7's longest brand name ("spark electronics") is a few
-   units wider than the 100-unit label space the code reserves, in
-   the original too. Letting the SVG draw outside its box shows the
-   whole label instead of clipping its first letter. */
+/* "spark electronics" in 4.7 is a few units wider than the 100-unit
+   label space (in the original too); this keeps its first letter. */
 .chart--labels svg { overflow: visible; }
 
-/* Replaces the black debug border from the original exercises
-   (.style("border", "1px solid black")): the canvas edge is still
-   visible, in the theme's own rule colour. */
+/* Replaces the black debug border of Exercises 4.3–4.7
+   (.style("border", "1px solid black")) with a softer outline. */
 .chart-canvas { border: 1px dashed var(--canvas-edge); }
 
-/* Read-outs reuse the calculator's meter panel (section 7). */
-.readout h3 { font-size: 1.05rem; }
-
-/* Spec panels mix numbers and short phrases; one size keeps the
-   column of values even. */
-.readout--spec .readout__value { font-size: 1.05rem; }
-
-.readout__value--text {
-  font-size: 0.95rem;
-  text-align: right;
-}
-
-.readout__note {
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: var(--readout-muted);
-  margin: 14px 0 0;
-}
-
-.readout__note code {
-  background: var(--readout-rule);
-  color: #fff;
-}
-
-/* A horizontal read-out strip for the wide charts. */
-.readout--strip { padding: 20px 24px; }
-
-.readout--strip .readout__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 0 28px;
-}
-
-.readout--strip .readout__row {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-}
-
-/* Colour keys sit beside text; the text itself stays in ink. */
-.key {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  margin-right: 8px;
-  flex-shrink: 0;
-}
-
-.key--teal     { background: var(--teal); }
-.key--slate    { background: var(--ink-soft); }
-.key--series-1 { background: var(--series-1); }
-.key--series-2 { background: var(--series-2); }
-.key--series-3 { background: var(--series-3); }
-.key--ramp-1   { background: var(--ramp-1); }
-.key--ramp-2   { background: var(--ramp-2); }
-.key--ramp-3   { background: var(--ramp-3); }
-
-.readout .key { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35); }
-
-/* ---------- 13. SVG typography and axes --------------------
-   D3 axes ship with their own font and black strokes. These
-   rules hand them the site's data face and rule colour. Colours
-   for the marks themselves are set in the D3 code from theme.js.
+/* ---------- 13. SVG text and axes --------------------------
+   D3 axes come with their own font and black strokes. These rules
+   give them the site's data font and rule colour. Mark colours are
+   set in the D3 code from theme.js.
    ---------------------------------------------------------- */
 .chart text { font-family: var(--font-data); }
 
@@ -860,7 +721,7 @@ summary:focus-visible {
   font-weight: 600;
 }
 
-/* Exercise 5.1: vertical bar chart */
+/* Exercise 5.1 */
 #bar-chart .x-axis text {
   font-size: 15px;
   font-weight: 600;
@@ -877,8 +738,8 @@ summary:focus-visible {
   fill: var(--ink);
 }
 
-/* Exercise 5.3: donut labels sit inside the slices, so their
-   colour (ink or white) is picked in the D3 code by contrast. */
+/* Exercise 5.3: the label colour (ink or white) is picked in the
+   D3 code so it reads on its slice. */
 #donut-chart .slice-label {
   font-size: 16px;
   font-weight: 600;
@@ -886,7 +747,7 @@ summary:focus-visible {
   text-transform: uppercase;
 }
 
-/* Exercise 6: histogram and scatterplot */
+/* Exercise 6 */
 #histogram .tick text,
 #scatterplot .tick text { font-size: 11px; }
 
@@ -899,7 +760,7 @@ summary:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 16px;
-  margin: 22px 0 16px;
+  margin: 0 0 16px;
 }
 
 .filter-row__label {
@@ -911,7 +772,7 @@ summary:focus-visible {
   margin: 0;
 }
 
-/* The buttons are created by interactions.js inside this div. */
+/* interactions.js creates the buttons inside this div. */
 #filters_screen {
   display: flex;
   flex-wrap: wrap;
@@ -938,7 +799,7 @@ summary:focus-visible {
   border-color: var(--amber);
 }
 
-/* The selected filter mirrors the active page in the nav bar. */
+/* The selected filter looks like the active page in the nav bar. */
 .filter.active {
   background: var(--amber);
   border-color: var(--amber-deep);
@@ -951,8 +812,7 @@ summary:focus-visible {
   fill: var(--ink);
 }
 
-/* Tooltip (Exercise 6.4). The mouse passes through it so it never
-   blocks the circles underneath. */
+/* Tooltip (Exercise 6.4): the mouse passes through it. */
 .tooltip { pointer-events: none; }
 
 .tooltip text {
@@ -960,183 +820,12 @@ summary:focus-visible {
   font-size: 15px;
 }
 
-/* ---------- 15. Code excerpts and inline code -------------- */
-code {
-  font-family: var(--font-data);
-  font-size: 0.88em;
-  background: #e4e9ec;
-  padding: 1px 5px;
-  border-radius: 3px;
-}
-
-.code {
-  margin-top: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-}
-
-.code summary {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  cursor: pointer;
-  list-style: none;
-  font-family: var(--font-data);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.code summary::-webkit-details-marker { display: none; }
-
-/* Same rotating "+" marker as the FAQ accordion. */
-.code summary::before {
-  content: "+";
-  font-size: 1.25rem;
-  line-height: 1;
-  color: var(--amber-deep);
-  transition: transform 0.2s ease;
-}
-
-.code[open] summary::before { transform: rotate(45deg); }
-
-.code summary:hover { color: var(--ink); }
-
-.code pre,
-.code-block {
-  margin: 0;
-  padding: 16px 18px;
-  overflow-x: auto;
-  background: var(--ink);
-  color: #dfe7ed;
-  font-family: var(--font-data);
-  font-size: 0.8rem;
-  line-height: 1.65;
-  tab-size: 4;
-}
-
-.code pre { border-radius: 0 0 var(--radius) var(--radius); }
-
-.code-block { border-radius: var(--radius); }
-
-.code pre code,
-.code-block code {
-  background: none;
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-}
-
-/* Comments and the lines the hub changed. */
-.code .c,
-.code-block .c { color: #8fa3b3; }
-
-.code .hl,
-.code-block .hl { color: var(--amber); }
-
-/* ---------- 16. Data and about pages ----------------------- */
-.table-scroll { overflow-x: auto; }
-
-.data-block + .data-block { margin-top: 48px; }
-
-.data-block .note { margin-top: 16px; }
-
-.data-table th.num,
-.data-table td.num { text-align: right; }
-
-.data-table td.num { font-variant-numeric: tabular-nums; }
-
-.data-table th[scope="row"] { font-weight: 600; }
-
-.data-table td.muted { color: var(--ink-soft); }
-
-.data-table .key { vertical-align: baseline; }
-
-/* Small tables read better without stretching across the page. */
-.table-narrow { max-width: 760px; }
-
-.loading {
-  font-family: var(--font-data);
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-}
-
-.steps {
-  max-width: 66ch;
-  padding-left: 1.2em;
-}
-
-.steps li { margin-bottom: 0.6em; }
-
-/* ---------- 17. Landing page ------------------------------- */
-.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-.site-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.site-card__tag {
-  font-family: var(--font-data);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin: 0 0 8px;
-}
-
-.site-card p { color: var(--ink-soft); }
-
-.site-card__links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-top: auto;
-  padding-top: 6px;
-}
-
-/* The standalone original is marked off from the new hubs. */
-.card--original {
-  background: transparent;
-  border-style: dashed;
-}
-
-/* ---------- 18. Responsive rules for the hub layer --------- */
+/* ---------- 15. Responsive rules for the hub layer --------- */
 @media (max-width: 840px) {
-  .viz { grid-template-columns: minmax(0, 1fr); }
-  .grid--2 { grid-template-columns: minmax(0, 1fr); }
+  .exercise__split { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 620px) {
-  /* On a phone the tabs wrap into rows, so every exercise stays
-     visible instead of hiding off the side of a scrolling strip. */
-  .tabs {
-    flex-wrap: wrap;
-    gap: 0;
-    overflow: visible;
-    box-shadow: none;
-  }
-  .tab {
-    flex: 1 1 50%;
-    min-width: 0;
-    padding: 12px 12px 10px;
-    border-bottom: 0;
-    box-shadow: inset 0 -1px 0 var(--rule);
-  }
-  .tab:hover { box-shadow: inset 0 -3px 0 var(--rule); }
-  .tab[aria-selected="true"] { box-shadow: inset 0 -3px 0 var(--amber); }
-  .tab__label {
-    white-space: normal;
-    letter-spacing: 0.1em;
-  }
-  .tab__sub { font-size: 0.92rem; }
+  .exercise { padding: 36px 0; }
   .chart-card { padding: 14px; }
-  .readout--strip .readout__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
