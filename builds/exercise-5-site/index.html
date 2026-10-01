@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 5 Hub | Appliance Energy Consumption</title>
+  <meta name="description" content="COS30045 Exercise 5: a vertical bar chart, a line chart and a donut chart of TV energy use and Australian spot power prices, in the Appliance Energy Consumption theme.">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION (same on every page of this hub) ============ -->
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <!-- Logo links back to the Home page -->
+      <a class="nav__logo" href="index.html">
+        <img src="assets/img/PowerIcon.png" alt="Appliance Energy Consumption home">
+        <span class="nav__wordmark">
+          Appliance Energy
+          <span>Consumption AU</span>
+        </span>
+      </a>
+      <ul class="nav__links">
+        <!-- aria-current marks the active page; CSS styles it -->
+        <li><a class="nav__link" href="index.html" aria-current="page">Home</a></li>
+        <li><a class="nav__link" href="data.html">Data</a></li>
+        <li><a class="nav__link" href="about.html">About</a></li>
+        <li><a class="nav__link" href="../index.html">All sites</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Exercise 5 · Bar, line and donut charts</p>
+        <h1>Three charts, three questions.</h1>
+        <p class="hero__lead">
+          How much energy does a 55-inch TV use for each screen technology?
+          How has the price of electricity moved since 1998? And how is the
+          TV range split by screen size? Each tab answers one of these with
+          its original Exercise 5 D3 code, running inside this site's
+          theme.
+        </p>
+
+        <!-- Signature element, cloned from Exercise 0.2: the meter-style
+             scale, relabelled with the three charts. -->
+        <div class="scale" aria-hidden="true">
+          <div class="scale__ticks">
+            <div class="scale__tick scale__tick--low"  style="height: 14%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 22%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 31%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 44%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 52%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 61%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 78%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 90%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 100%"></div>
+          </div>
+          <p class="scale__legend">
+            <span>5.1 Bar</span>
+            <span>5.2 Line</span>
+            <span>5.3 Donut</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXERCISE TABS ============ -->
+    <section class="section section--tabs" id="exercises">
+      <div class="wrap">
+        <p class="eyebrow">Step through the exercises</p>
+        <h2>Exercises 5.1 to 5.3</h2>
+
+        <div class="tabs" role="tablist" aria-label="Exercise 5 charts">
+          <button class="tab" type="button" id="tab-5-1" role="tab"
+                  aria-selected="true" aria-controls="panel-5-1" data-tab="ex-5-1">
+            <span class="tab__label">Exercise 5.1</span>
+            <span class="tab__sub">Bar chart with axes</span>
+          </button>
+          <button class="tab" type="button" id="tab-5-2" role="tab"
+                  aria-selected="false" aria-controls="panel-5-2" data-tab="ex-5-2" tabindex="-1">
+            <span class="tab__label">Exercise 5.2</span>
+            <span class="tab__sub">Scatter and line</span>
+          </button>
+          <button class="tab" type="button" id="tab-5-3" role="tab"
+                  aria-selected="false" aria-controls="panel-5-3" data-tab="ex-5-3" tabindex="-1">
+            <span class="tab__label">Exercise 5.3</span>
+            <span class="tab__sub">Donut chart</span>
+          </button>
+        </div>
+
+        <!-- ===== 5.1 ===== -->
+        <div class="tab-panel" id="panel-5-1" role="tabpanel" aria-labelledby="tab-5-1" tabindex="0">
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Vertical bar chart with axes</h3>
+              <p>
+                Average labelled energy consumption of 55-inch TVs, by screen
+                technology. A band scale spaces the technologies along the
+                x-axis, a linear scale with 7% headroom sets the bar heights,
+                and <code>d3.axisBottom</code> and <code>d3.axisLeft</code>
+                draw the axes.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%205/index.html">Open original</a>
+          </div>
+
+          <div class="viz viz--stack">
+            <figure class="chart-card">
+              <div id="bar-chart" class="responsive-svg-container chart" role="img"
+                   aria-label="Bar chart of average energy use of 55-inch TVs by screen technology: LED 369 kWh, OLED 362 kWh and LCD 335 kWh per year."></div>
+              <figcaption>
+                Average labelled energy consumption (kWh per year) of 55-inch
+                TVs, by screen technology, sorted highest first.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--strip" aria-label="Exercise 5.1 values">
+              <div class="readout__grid">
+                <div class="readout__row">
+                  <span class="readout__label">LED</span>
+                  <span class="readout__value" data-readout="energy-led">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">OLED</span>
+                  <span class="readout__value" data-readout="energy-oled">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">LCD</span>
+                  <span class="readout__value" data-readout="energy-lcd">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Highest minus lowest</span>
+                  <span class="readout__value" data-readout="energy-spread">—</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/bar-chart.js</summary>
+<pre><code>const xScale = d3.scaleBand()
+    .domain(data.map(d =&gt; d.Screen_Tech))
+    .range([0, innerWidth])
+    .padding(0.1);
+
+const yScale = d3.scaleLinear()
+    <span class="c">// a little headroom above the tallest bar so its value label fits</span>
+    .domain([0, d3.max(data, d =&gt; d.Energy_Consumption) * 1.07])
+    .range([innerHeight, 0]);
+
+const bottomAxis = d3.axisBottom(xScale)
+    .tickSize(0)
+    .tickPadding(12)
+    .tickFormat(d =&gt; d.toUpperCase());   <span class="c">// lcd -&gt; LCD</span>
+
+<span class="c">// ...bars</span>
+    .attr("height", d =&gt; innerHeight - yScale(d.Energy_Consumption))
+    <span class="hl">.attr("fill", THEME.teal);             // was "green"</span></code></pre>
+          </details>
+        </div>
+
+        <!-- ===== 5.2 ===== -->
+        <div class="tab-panel" id="panel-5-2" role="tabpanel" aria-labelledby="tab-5-2" tabindex="0" hidden>
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Scatter plot and line chart</h3>
+              <p>
+                The average spot price of electricity in Australia from 1998
+                to 2024, across Queensland, New South Wales, Victoria and
+                South Australia. Both axes are linear scales;
+                <code>d3.line()</code> joins the yearly values and a circle
+                marks each year.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%205/index.html">Open original</a>
+          </div>
+
+          <div class="viz viz--stack">
+            <figure class="chart-card">
+              <div id="line-chart" class="responsive-svg-container chart" role="img"
+                   aria-label="Line chart of the average Australian spot power price, 1998 to 2024: $41.50 per megawatt hour in 1998, a low of $30.25 in 2011, a peak of $144.50 in 2022 and $132.50 in 2024."></div>
+              <figcaption>
+                Average spot power price ($ per megawatt hour) in Australia,
+                1998–2024, excluding Tasmania and Snowy.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--strip" aria-label="Exercise 5.2 values">
+              <div class="readout__grid">
+                <div class="readout__row">
+                  <span class="readout__label">Start · <span data-readout="price-first-year">1998</span></span>
+                  <span class="readout__value" data-readout="price-first">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Lowest · <span data-readout="price-low-year">2011</span></span>
+                  <span class="readout__value" data-readout="price-low">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Peak · <span data-readout="price-peak-year">2022</span></span>
+                  <span class="readout__value" data-readout="price-peak">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Latest · <span data-readout="price-last-year">2024</span></span>
+                  <span class="readout__value" data-readout="price-last">—</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/line-chart.js</summary>
+<pre><code>const xScale = d3.scaleLinear()
+    .domain(d3.extent(data, d =&gt; d.year))   <span class="c">// [1998, 2024]</span>
+    .range([0, innerWidth]);
+
+const yScale = d3.scaleLinear()
+    .domain([0, d3.max(data, d =&gt; d.averagePrice)])
+    .range([innerHeight, 0])
+    .nice();
+
+const lineGenerator = d3.line()
+    .x(d =&gt; xScale(d.year))
+    .y(d =&gt; yScale(d.averagePrice));
+
+innerChart.append("path")
+    .attr("d", lineGenerator(data))
+    .attr("fill", "none")
+    <span class="hl">.attr("stroke", lineColour);   // THEME.teal, was "#000"</span></code></pre>
+          </details>
+        </div>
+
+        <!-- ===== 5.3 ===== -->
+        <div class="tab-panel" id="panel-5-3" role="tabpanel" aria-labelledby="tab-5-3" tabindex="0" hidden>
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Donut chart</h3>
+              <p>
+                The share of TV models in each screen-size category.
+                <code>d3.pie()</code> turns each count into a start and end
+                angle, keeping the CSV's order with <code>.sort(null)</code>,
+                and <code>d3.arc()</code> draws each slice as a ring segment
+                from 60% to 100% of the radius.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%205/index.html">Open original</a>
+          </div>
+
+          <div class="viz viz--stack">
+            <figure class="chart-card">
+              <div id="donut-chart" class="responsive-svg-container chart" role="img"
+                   aria-label="Donut chart of TV models by screen size: medium 2,386 models (53%), large 1,352 (30%) and small 770 (17%)."></div>
+              <figcaption>
+                TV models in each screen-size category. Shades run from light
+                (small) to dark (large).
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--strip" aria-label="Exercise 5.3 values and colour key">
+              <div class="readout__grid">
+                <div class="readout__row">
+                  <span class="readout__label"><span class="key key--ramp-1" aria-hidden="true"></span>Small</span>
+                  <span class="readout__value" data-readout="size-small">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label"><span class="key key--ramp-2" aria-hidden="true"></span>Medium</span>
+                  <span class="readout__value" data-readout="size-medium">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label"><span class="key key--ramp-3" aria-hidden="true"></span>Large</span>
+                  <span class="readout__value" data-readout="size-large">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Total models</span>
+                  <span class="readout__value" data-readout="size-total">—</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/donut-chart.js</summary>
+<pre><code>const color = d3.scaleOrdinal()
+    .domain(data.map(d =&gt; d.Screensize_Category))
+    <span class="hl">.range(data.map(d =&gt; sizeShade[d.Screensize_Category] || THEME.teal));   // was d3.schemeSet2</span>
+
+const pie = d3.pie()
+    .value(d =&gt; d.Count)
+    .sort(null);   <span class="c">// keep the original data order</span>
+
+const arcGenerator = d3.arc()
+    .innerRadius(radius * 0.6)
+    .outerRadius(radius * 1);
+
+innerChart.selectAll("path")
+    .data(pie(data))
+    .join("path")
+    .attr("d", arcGenerator)
+    .attr("fill", d =&gt; color(d.data.Screensize_Category));</code></pre>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ KEY NUMBERS (cloned card grid) ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">What the data says</p>
+        <h2>Three numbers worth knowing</h2>
+
+        <div class="grid">
+          <article class="card">
+            <span class="card__figure" data-readout="energy-led">369 kWh</span>
+            <h3>A 55-inch LED TV</h3>
+            <p>
+              LED sets average the most energy of the three technologies:
+              <span data-readout="energy-spread">34 kWh</span> a year more
+              than LCD.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure" data-readout="price-change">+219%</span>
+            <h3>Spot price since 1998</h3>
+            <p>
+              From <span data-readout="price-first">$41.50</span> per megawatt
+              hour in 1998 to <span data-readout="price-last">$132.50</span>
+              in 2024, after a peak of <span data-readout="price-peak">$144.50</span>
+              in <span data-readout="price-peak-year">2022</span>.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure" data-readout="size-medium-share">53%</span>
+            <h3>Medium screens</h3>
+            <p>
+              More than half of the
+              <span data-readout="size-total">4,508</span> TV models in the
+              size data are medium screens.
+            </p>
+          </article>
+        </div>
+
+        <p class="note note--spaced">
+          Calculated live from the CSV files in <code>data/</code>, the same
+          files the charts load. See every value on the
+          <a href="data.html">Data</a> page.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ACCORDION (cloned component) ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Reading the charts</p>
+        <h2>FAQ</h2>
+
+        <div class="faq">
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-1" id="faq-btn-1">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why does the bar chart's y-axis go above the tallest bar?
+            </button>
+            <div class="faq__answer" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" hidden>
+              <p>
+                The y domain runs to the largest value × 1.07. That 7%
+                headroom keeps the value label above the tallest bar inside
+                the SVG instead of cutting it off at the top edge.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why do the years use scaleLinear rather than scaleBand?
+            </button>
+            <div class="faq__answer" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
+              <p>
+                Years are continuous: the distance between two points on the
+                line should match the time between them. The bar chart's
+                screen technologies are separate categories with no order,
+                which is what a band scale is for.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              How does d3.pie turn counts into a donut?
+            </button>
+            <div class="faq__answer" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
+              <p>
+                <code>d3.pie()</code> gives each row a start and end angle in
+                proportion to its <code>Count</code>, and
+                <code>.sort(null)</code> keeps the CSV's order.
+                <code>d3.arc()</code> then turns each pair of angles into a
+                path between the inner radius (60% of the radius) and the
+                outer radius, which is what leaves the hole in the middle.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why is the donut in shades of one colour?
+            </button>
+            <div class="faq__answer" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
+              <p>
+                Screen size has an order (small, medium, large), so a light
+                to dark ramp of one hue shows that order at a glance. The
+                original used <code>d3.schemeSet2</code>, a palette for
+                unrelated categories. The chart still uses
+                <code>d3.scaleOrdinal()</code> with the same domain; only
+                the colours in its range changed.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (same on every page of this hub) ============ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="current-year">2026</span> <strong>Lynn Myat Bhone Htut</strong> — Appliance Energy Consumption Website · Exercise 5 hub.</p>
+      <p>Built for COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p>
+        <strong>Generative AI acknowledgement:</strong> this hub was assembled
+        and restyled with the help of a generative AI tool (Claude). The D3
+        chart code is the author's own Exercise 5 work.
+      </p>
+    </div>
+  </footer>
+
+  <!-- D3 first, then the theme bridge, then the chart code, then the data
+       loader that calls it (the same order as the original page) -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="js/bar-chart.js"></script>
+  <script src="js/line-chart.js"></script>
+  <script src="js/donut-chart.js"></script>
+  <script src="js/load-data.js"></script>
+  <script src="assets/js/hub-readouts.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/faq.js"></script>
+  <script src="assets/js/tabs.js"></script>
+</body>
+</html>

@@ -1,0 +1,1142 @@
+/* ============================================================
+   Appliance Energy Consumption Website
+   Single external stylesheet, shared by all three pages.
+
+   Sections:
+     1. Design tokens (colours, type, spacing)
+     2. Base / reset
+     3. Layout helpers
+     4. Header & navigation
+     5. Hero + energy scale (signature element)
+     6. Cards, tables, FAQ accordion
+     7. Calculator
+     8. Footer
+     9. Responsive rules
+   ============================================================ */
+
+/* ---------- 1. Design tokens -------------------------------
+   Colours are taken from the power logo: dark slate body,
+   amber "electricity" accent. If your logo colours differ,
+   change them ONCE here and the whole site updates.
+   ---------------------------------------------------------- */
+:root {
+  --ink:        #14202b;   /* logo dark slate  */
+  --ink-soft:   #3d5163;
+  --amber:      #f2a20c;   /* logo amber       */
+  --amber-deep: #c07c00;
+  --teal:       #0e6e6b;   /* "efficient"      */
+  --red:        #b3321f;   /* "high use"       */
+  --paper:      #eef1f3;   /* page background  */
+  --card:       #ffffff;
+  --rule:       #c9d2d6;
+
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "IBM Plex Sans", system-ui, sans-serif;
+  --font-data:    "IBM Plex Mono", "Courier New", monospace;
+
+  --wrap: 1080px;
+  --radius: 4px;
+}
+
+/* ---------- 2. Base ---------------------------------------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+h3 { font-size: 1.15rem; }
+
+p { margin: 0 0 1em; }
+
+a { color: var(--teal); }
+
+/* Keyboard focus must always be visible for accessibility. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Visible to screen readers only — used for table headings that
+   would look redundant on screen. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Small uppercase label used above section headings. */
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.6em;
+}
+
+/* ---------- 3. Layout helpers ------------------------------ */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section { padding: 56px 0; }
+.section--tight { padding: 32px 0; }
+
+.note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--rule);
+  padding-left: 12px;
+}
+
+/* ---------- 4. Header & navigation ------------------------- */
+.site-header {
+  background: var(--ink);
+  border-bottom: 4px solid var(--amber);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 72px;
+}
+
+/* Logo sits top-left and links back to the Home page. */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.nav__logo img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.nav__logo:hover img { transform: rotate(-8deg) scale(1.08); }
+
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.nav__wordmark span {
+  display: block;
+  font-family: var(--font-data);
+  font-weight: 400;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  display: block;
+  padding: 10px 14px;
+  color: #cdd7de;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Mouse-over (hover) effect */
+.nav__link:hover {
+  color: #fff;
+  border-bottom-color: var(--amber);
+}
+
+/* Current page indicator. aria-current="page" is set in the
+   HTML of each page, so screen readers get the same signal. */
+.nav__link[aria-current="page"] {
+  color: var(--ink);
+  background: var(--amber);
+  border-bottom-color: var(--amber-deep);
+  font-weight: 600;
+}
+
+/* ---------- 5. Hero + energy scale ------------------------- */
+.hero {
+  background: var(--card);
+  border-bottom: 1px solid var(--rule);
+  padding: 64px 0 48px;
+}
+
+.hero__lead {
+  font-size: 1.12rem;
+  max-width: 58ch;
+  color: var(--ink-soft);
+}
+
+/* Signature element: a running "energy scale" strip modelled on
+   the tick marks of a household electricity meter. */
+.scale {
+  margin-top: 40px;
+  border-top: 2px solid var(--ink);
+  padding-top: 14px;
+}
+
+.scale__ticks {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 84px;
+}
+
+.scale__tick {
+  flex: 1;
+  background: var(--rule);
+  border-radius: 1px 1px 0 0;
+}
+
+.scale__tick--low  { background: var(--teal); }
+.scale__tick--mid  { background: var(--amber); }
+.scale__tick--high { background: var(--red); }
+
+.scale__legend {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+/* ---------- 6. Cards, tables, FAQ -------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.card__figure {
+  font-family: var(--font-data);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--amber-deep);
+  display: block;
+  line-height: 1.2;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  font-size: 0.95rem;
+}
+
+.data-table caption {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  padding-bottom: 10px;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid var(--rule);
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.data-table thead th {
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.data-table td.num {
+  font-family: var(--font-data);
+  text-align: right;
+}
+
+.data-table tbody tr:hover { background: #f7f9fa; }
+
+/* Small button used in the TV table to send a wattage to the
+   calculator on the Home page. */
+.mini-btn {
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  background: #fdf0d5;
+  border: 1px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 5px 9px;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.mini-btn:hover { background: var(--amber); }
+
+/* FAQ accordion --------------------------------------------- */
+.faq { max-width: 760px; }
+
+.faq__item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: none;
+  border: 0;
+  padding: 18px 0;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq__question:hover { color: var(--amber-deep); }
+
+/* The +/- marker rotates when the panel opens. */
+.faq__marker {
+  font-family: var(--font-data);
+  font-size: 1.3rem;
+  color: var(--amber-deep);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.faq__question[aria-expanded="true"] .faq__marker {
+  transform: rotate(45deg);
+}
+
+/* Hidden by default; JavaScript toggles the [hidden] attribute. */
+.faq__answer {
+  padding: 0 0 18px 32px;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.faq__answer[hidden] { display: none; }
+
+/* ---------- 7. Calculator ---------------------------------- */
+.calc {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.calc__form {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+
+.field__hint {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  font-family: var(--font-data);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+}
+
+/* Error state, added by JavaScript when validation fails. */
+.field input.is-invalid,
+.field select.is-invalid {
+  border-color: var(--red);
+  background: #fdf3f1;
+}
+
+.field__error {
+  display: block;
+  min-height: 1.2em;
+  font-size: 0.82rem;
+  color: var(--red);
+  margin-top: 4px;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  background: var(--amber);
+  color: var(--ink);
+  border: 0;
+  border-radius: var(--radius);
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn:hover { background: var(--amber-deep); color: #fff; }
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--rule);
+  margin-left: 8px;
+}
+
+.btn--ghost:hover { background: var(--rule); color: var(--ink); }
+
+/* Results panel styled like a meter read-out. */
+.readout {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.readout h3 {
+  color: #fff;
+  border-bottom: 1px solid #2c4256;
+  padding-bottom: 12px;
+}
+
+.readout__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px dashed #2c4256;
+}
+
+.readout__label {
+  font-size: 0.88rem;
+  color: #a9bcca;
+}
+
+.readout__value {
+  font-family: var(--font-data);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.readout__value--big { font-size: 1.75rem; }
+
+.readout__empty {
+  font-size: 0.9rem;
+  color: #a9bcca;
+}
+
+/* ---------- 8. Footer -------------------------------------- */
+.site-footer {
+  background: var(--ink);
+  color: #a9bcca;
+  border-top: 4px solid var(--amber);
+  padding: 32px 0;
+  font-size: 0.88rem;
+  margin-top: 24px;
+}
+
+.site-footer strong { color: #fff; }
+
+.site-footer p { margin: 0 0 6px; }
+
+.site-footer a { color: var(--amber); }
+
+/* ---------- 9. Responsive ---------------------------------- */
+@media (max-width: 840px) {
+  .grid { grid-template-columns: 1fr; }
+  .calc { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .nav {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+  .nav__links { width: 100%; }
+  .nav__link { padding: 8px 10px; font-size: 0.88rem; }
+  .scale__ticks { height: 60px; }
+  .table-scroll { overflow-x: auto; }
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+
+/* ============================================================
+   HUB LAYER
+   ------------------------------------------------------------
+   Everything above this comment is the Exercise 0.2 stylesheet
+   (energy-webpage-v1/styles.css), cloned without any changes.
+   Everything below adds what the D3 exercise hubs need. It only
+   uses the tokens from section 1 (plus the chart tokens in
+   section 10), so the charts read as part of the same site.
+
+   Sections:
+     10. Chart tokens
+     11. Exercise tabs (adapted from the Exercise 3 story tabs)
+     12. Exercise panels, chart cards and read-outs
+     13. SVG typography and axes
+     14. Exercise 6 controls: filters, legend, tooltip
+     15. Code excerpts and inline code
+     16. Data and about pages
+     17. Landing page
+     18. Responsive rules for the hub layer
+   ============================================================ */
+
+/* ---------- 10. Chart tokens -------------------------------
+   Single-series marks use --teal (or --ink-soft for the
+   Exercise 6 histogram, which shows every screen type at once).
+   The two sets below were checked for colour-blind separation
+   (protanopia and deuteranopia) and for contrast against the
+   white card:
+     --series-*  three hues for unordered categories (LED/LCD/OLED)
+     --ramp-*    one teal, light to dark, for ordered categories
+                 (small < medium < large)
+   assets/js/theme.js reads these values, so the D3 code never
+   hard-codes a colour. Change a value here and the charts follow.
+   ---------------------------------------------------------- */
+:root {
+  --series-1: #009894;   /* teal                         */
+  --series-2: #c07c00;   /* amber (same as --amber-deep) */
+  --series-3: #5b4fa8;   /* violet                       */
+
+  --ramp-1: #62b6b0;     /* light teal: small  */
+  --ramp-2: #0e7f7a;     /* mid teal:   medium */
+  --ramp-3: #0b5f5c;     /* dark teal:  large  */
+
+  --canvas-edge: #9aabb5;   /* dashed outline that replaces the debug border */
+  --readout-muted: #a9bcca; /* same values the calculator read-out uses      */
+  --readout-rule: #2c4256;
+}
+
+/* Buttons styled as links, used on the landing page and in panels. */
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+a.mini-btn { display: inline-block; }
+
+summary:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Spacing for a note under a grid or in the hero (the original
+   pages use an inline margin-top: 22px for the same job). */
+.note--spaced { margin-top: 22px; }
+
+/* ---------- 11. Exercise tabs ------------------------------
+   Same WAI-ARIA pattern as the Exercise 3 story tabs, restyled
+   to echo the navigation bar: the open tab carries the amber
+   underline, the rest sit back in --ink-soft.
+   ---------------------------------------------------------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 28px 0 0;
+  overflow-x: auto;
+  /* The strip's rule is drawn as an inset shadow so the open
+     tab's amber underline can sit on top of it without the
+     strip needing negative margins (which would make it scroll). */
+  box-shadow: inset 0 -1px 0 var(--rule);
+}
+
+.tab {
+  flex: 1 0 0;
+  min-width: 132px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 16px 12px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.tab:hover {
+  color: var(--ink);
+  background: var(--card);
+  border-bottom-color: var(--rule);
+}
+
+.tab[aria-selected="true"] {
+  color: var(--ink);
+  background: var(--card);
+  border-bottom-color: var(--amber);
+}
+
+.tab__label {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tab__sub {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.tab-panel { padding-top: 32px; }
+
+/* Panels are shown and hidden with the hidden attribute in
+   tabs.js. This guards against another rule overriding it. */
+.tab-panel[hidden] { display: none; }
+
+.tab-panel:focus { outline: none; }
+
+.tab-panel:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 6px;
+}
+
+/* The tabs section clears the sticky header when a link such
+   as index.html#ex-4-6 scrolls it into view. */
+.section--tabs { scroll-margin-top: 80px; }
+
+/* ---------- 12. Panels, chart cards and read-outs ---------- */
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px 32px;
+}
+
+.panel-head__text {
+  flex: 1 1 520px;
+  max-width: 66ch;
+}
+
+.panel-head h3 {
+  font-size: 1.45rem;
+  margin-bottom: 0.4em;
+}
+
+.panel-head p { color: var(--ink-soft); }
+
+/* Chart beside its read-out, the same split as the calculator. */
+.viz {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+/* Wide charts (Exercises 5 and 6) take the full width and put
+   their read-out underneath, so the tick labels stay legible. */
+.viz--stack { grid-template-columns: minmax(0, 1fr); }
+
+.chart-card {
+  margin: 0;
+  min-width: 0;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.chart-card figcaption {
+  font-family: var(--font-data);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-top: 14px;
+  padding-left: 12px;
+  border-left: 3px solid var(--amber);
+}
+
+/* The D3 containers. Every chart keeps its own viewBox, so the
+   SVG scales to whatever width its container allows. */
+.chart {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Exercises 4.3–4.5 draw on a tall 1200 x 1600 canvas and 4.6–4.7
+   on 500 x 600. Capping the width keeps them on screen without
+   changing the canvas the code asks for. */
+.chart--portrait { max-width: 440px; }
+.chart--square   { max-width: 520px; }
+
+/* Exercise 4.7's longest brand name ("spark electronics") is a few
+   units wider than the 100-unit label space the code reserves, in
+   the original too. Letting the SVG draw outside its box shows the
+   whole label instead of clipping its first letter. */
+.chart--labels svg { overflow: visible; }
+
+/* Replaces the black debug border from the original exercises
+   (.style("border", "1px solid black")): the canvas edge is still
+   visible, in the theme's own rule colour. */
+.chart-canvas { border: 1px dashed var(--canvas-edge); }
+
+/* Read-outs reuse the calculator's meter panel (section 7). */
+.readout h3 { font-size: 1.05rem; }
+
+/* Spec panels mix numbers and short phrases; one size keeps the
+   column of values even. */
+.readout--spec .readout__value { font-size: 1.05rem; }
+
+.readout__value--text {
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+.readout__note {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--readout-muted);
+  margin: 14px 0 0;
+}
+
+.readout__note code {
+  background: var(--readout-rule);
+  color: #fff;
+}
+
+/* A horizontal read-out strip for the wide charts. */
+.readout--strip { padding: 20px 24px; }
+
+.readout--strip .readout__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0 28px;
+}
+
+.readout--strip .readout__row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+/* Colour keys sit beside text; the text itself stays in ink. */
+.key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.key--teal     { background: var(--teal); }
+.key--slate    { background: var(--ink-soft); }
+.key--series-1 { background: var(--series-1); }
+.key--series-2 { background: var(--series-2); }
+.key--series-3 { background: var(--series-3); }
+.key--ramp-1   { background: var(--ramp-1); }
+.key--ramp-2   { background: var(--ramp-2); }
+.key--ramp-3   { background: var(--ramp-3); }
+
+.readout .key { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35); }
+
+/* ---------- 13. SVG typography and axes --------------------
+   D3 axes ship with their own font and black strokes. These
+   rules hand them the site's data face and rule colour. Colours
+   for the marks themselves are set in the D3 code from theme.js.
+   ---------------------------------------------------------- */
+.chart text { font-family: var(--font-data); }
+
+.chart .tick text { fill: var(--ink-soft); }
+
+.chart .domain,
+.chart .tick line { stroke: var(--rule); }
+
+.chart .axis-label {
+  fill: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+
+.chart .chart-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.chart .chart-subtitle { letter-spacing: 0.14em; }
+
+/* Exercise 4.7: brand names and counts */
+.chart .bar-brand {
+  font-family: var(--font-body);
+  fill: var(--ink-soft);
+}
+
+.chart .bar-value {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+/* Exercise 5.1: vertical bar chart */
+#bar-chart .x-axis text {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  fill: var(--ink);
+}
+
+#bar-chart .y-axis text { font-size: 12px; }
+#bar-chart .axis-label  { font-size: 14px; }
+
+#bar-chart .bar-label {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+/* Exercise 5.3: donut labels sit inside the slices, so their
+   colour (ink or white) is picked in the D3 code by contrast. */
+#donut-chart .slice-label {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Exercise 6: histogram and scatterplot */
+#histogram .tick text,
+#scatterplot .tick text { font-size: 11px; }
+
+#histogram .axis-label,
+#scatterplot .axis-label { font-size: 13px; }
+
+/* ---------- 14. Exercise 6 controls ------------------------ */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin: 22px 0 16px;
+}
+
+.filter-row__label {
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* The buttons are created by interactions.js inside this div. */
+#filters_screen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter {
+  min-width: 76px;
+  padding: 9px 16px;
+  font-family: var(--font-data);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.filter:hover {
+  background: #fdf0d5;
+  border-color: var(--amber);
+}
+
+/* The selected filter mirrors the active page in the nav bar. */
+.filter.active {
+  background: var(--amber);
+  border-color: var(--amber-deep);
+  font-weight: 600;
+}
+
+.legend-label {
+  font-family: var(--font-data);
+  font-size: 13px;
+  fill: var(--ink);
+}
+
+/* Tooltip (Exercise 6.4). The mouse passes through it so it never
+   blocks the circles underneath. */
+.tooltip { pointer-events: none; }
+
+.tooltip text {
+  font-family: var(--font-data);
+  font-size: 15px;
+}
+
+/* ---------- 15. Code excerpts and inline code -------------- */
+code {
+  font-family: var(--font-data);
+  font-size: 0.88em;
+  background: #e4e9ec;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.code {
+  margin-top: 20px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.code summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.code summary::-webkit-details-marker { display: none; }
+
+/* Same rotating "+" marker as the FAQ accordion. */
+.code summary::before {
+  content: "+";
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--amber-deep);
+  transition: transform 0.2s ease;
+}
+
+.code[open] summary::before { transform: rotate(45deg); }
+
+.code summary:hover { color: var(--ink); }
+
+.code pre,
+.code-block {
+  margin: 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  background: var(--ink);
+  color: #dfe7ed;
+  font-family: var(--font-data);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  tab-size: 4;
+}
+
+.code pre { border-radius: 0 0 var(--radius) var(--radius); }
+
+.code-block { border-radius: var(--radius); }
+
+.code pre code,
+.code-block code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Comments and the lines the hub changed. */
+.code .c,
+.code-block .c { color: #8fa3b3; }
+
+.code .hl,
+.code-block .hl { color: var(--amber); }
+
+/* ---------- 16. Data and about pages ----------------------- */
+.table-scroll { overflow-x: auto; }
+
+.data-block + .data-block { margin-top: 48px; }
+
+.data-block .note { margin-top: 16px; }
+
+.data-table th.num,
+.data-table td.num { text-align: right; }
+
+.data-table td.num { font-variant-numeric: tabular-nums; }
+
+.data-table th[scope="row"] { font-weight: 600; }
+
+.data-table td.muted { color: var(--ink-soft); }
+
+.data-table .key { vertical-align: baseline; }
+
+/* Small tables read better without stretching across the page. */
+.table-narrow { max-width: 760px; }
+
+.loading {
+  font-family: var(--font-data);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.steps {
+  max-width: 66ch;
+  padding-left: 1.2em;
+}
+
+.steps li { margin-bottom: 0.6em; }
+
+/* ---------- 17. Landing page ------------------------------- */
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.site-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-card__tag {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+
+.site-card p { color: var(--ink-soft); }
+
+.site-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+/* The standalone original is marked off from the new hubs. */
+.card--original {
+  background: transparent;
+  border-style: dashed;
+}
+
+/* ---------- 18. Responsive rules for the hub layer --------- */
+@media (max-width: 840px) {
+  .viz { grid-template-columns: minmax(0, 1fr); }
+  .grid--2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 620px) {
+  /* On a phone the tabs wrap into rows, so every exercise stays
+     visible instead of hiding off the side of a scrolling strip. */
+  .tabs {
+    flex-wrap: wrap;
+    gap: 0;
+    overflow: visible;
+    box-shadow: none;
+  }
+  .tab {
+    flex: 1 1 50%;
+    min-width: 0;
+    padding: 12px 12px 10px;
+    border-bottom: 0;
+    box-shadow: inset 0 -1px 0 var(--rule);
+  }
+  .tab:hover { box-shadow: inset 0 -3px 0 var(--rule); }
+  .tab[aria-selected="true"] { box-shadow: inset 0 -3px 0 var(--amber); }
+  .tab__label {
+    white-space: normal;
+    letter-spacing: 0.1em;
+  }
+  .tab__sub { font-size: 0.92rem; }
+  .chart-card { padding: 14px; }
+  .readout--strip .readout__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

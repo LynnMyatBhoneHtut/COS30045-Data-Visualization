@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data | Exercise 4 Hub | Appliance Energy Consumption</title>
+  <meta name="description" content="The tvBrandCount.csv data behind the Exercise 4 charts: TV models sold in Australia, by brand.">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <a class="nav__logo" href="index.html">
+        <img src="assets/img/PowerIcon.png" alt="Appliance Energy Consumption home">
+        <span class="nav__wordmark">
+          Appliance Energy
+          <span>Consumption AU</span>
+        </span>
+      </a>
+      <ul class="nav__links">
+        <li><a class="nav__link" href="index.html">Home</a></li>
+        <li><a class="nav__link" href="data.html" aria-current="page">Data</a></li>
+        <li><a class="nav__link" href="about.html">About</a></li>
+        <li><a class="nav__link" href="../index.html">All sites</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">The data behind the charts</p>
+        <h1>TV models by brand</h1>
+        <p class="hero__lead">
+          Every chart in this hub reads the same file,
+          <code>data/tvBrandCount.csv</code>: one row per brand with the
+          number of TV models it sells in Australia. The table below is
+          loaded from that file when the page opens, so it always matches
+          the charts.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="data-block">
+          <p class="eyebrow">tvBrandCount.csv</p>
+          <h2>Brands, sorted by model count</h2>
+          <div id="table-brands" class="table-narrow">
+            <p class="loading">Loading tvBrandCount.csv…</p>
+          </div>
+          <p class="note">
+            The CSV has two columns, <code>brand</code> and <code>count</code>.
+            Rank and share are worked out on this page; share is each
+            brand's count divided by the total of all counts. The same
+            file was used, unchanged, in Exercises 4.4 to 4.7.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="current-year">2026</span> <strong>Lynn Myat Bhone Htut</strong> — Appliance Energy Consumption Website · Exercise 4 hub.</p>
+      <p>Built for COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p>
+        <strong>Generative AI acknowledgement:</strong> this hub was assembled
+        and restyled with the help of a generative AI tool (Claude). The D3
+        chart code is the author's own Exercise 4 work.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="assets/js/data-table.js"></script>
+  <script src="assets/js/data-page.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

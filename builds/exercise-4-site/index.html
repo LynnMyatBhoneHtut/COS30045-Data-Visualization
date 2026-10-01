@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 4 Hub | Appliance Energy Consumption</title>
+  <meta name="description" content="COS30045 Exercises 4.3 to 4.7: one D3 bar chart of TV models by brand, built step by step, in the Appliance Energy Consumption theme.">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION (same on every page of this hub) ============ -->
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <!-- Logo links back to the Home page -->
+      <a class="nav__logo" href="index.html">
+        <img src="assets/img/PowerIcon.png" alt="Appliance Energy Consumption home">
+        <span class="nav__wordmark">
+          Appliance Energy
+          <span>Consumption AU</span>
+        </span>
+      </a>
+      <ul class="nav__links">
+        <!-- aria-current marks the active page; CSS styles it -->
+        <li><a class="nav__link" href="index.html" aria-current="page">Home</a></li>
+        <li><a class="nav__link" href="data.html">Data</a></li>
+        <li><a class="nav__link" href="about.html">About</a></li>
+        <li><a class="nav__link" href="../index.html">All sites</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Exercise 4 · Introduction to D3.js</p>
+        <h1>One bar chart, built in five steps.</h1>
+        <p class="hero__lead">
+          Exercises 4.3 to 4.7 grow a single D3 chart of TV models by brand:
+          an empty canvas, data read from a CSV file, bars bound to that
+          data, scales that fit the bars to any canvas, and finally labels.
+          Each tab below runs that step's own code, restyled in this
+          site's colours.
+        </p>
+
+        <!-- Signature element, cloned from Exercise 0.2: the meter-style
+             scale, relabelled with the stages of the exercise. -->
+        <div class="scale" aria-hidden="true">
+          <div class="scale__ticks">
+            <div class="scale__tick scale__tick--low"  style="height: 14%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 22%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 31%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 44%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 52%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 61%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 78%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 90%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 100%"></div>
+          </div>
+          <p class="scale__legend">
+            <span>Canvas &amp; data</span>
+            <span>Binding &amp; scales</span>
+            <span>Labels</span>
+          </p>
+        </div>
+
+        <p class="note note--spaced">
+          Exercise 4.1 (the SVG house) is not part of this hub. It stays a
+          standalone page in its original folder:
+          <a href="../../Exercise%204/Exercise%204.1/index.html">open Exercise 4.1</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ EXERCISE TABS ============ -->
+    <section class="section section--tabs" id="exercises">
+      <div class="wrap">
+        <p class="eyebrow">Step through the exercises</p>
+        <h2>Exercises 4.3 to 4.7</h2>
+
+        <div class="tabs" role="tablist" aria-label="Exercise 4 steps">
+          <button class="tab" type="button" id="tab-4-3" role="tab"
+                  aria-selected="true" aria-controls="panel-4-3" data-tab="ex-4-3">
+            <span class="tab__label">Exercise 4.3</span>
+            <span class="tab__sub">Set up D3</span>
+          </button>
+          <button class="tab" type="button" id="tab-4-4" role="tab"
+                  aria-selected="false" aria-controls="panel-4-4" data-tab="ex-4-4" tabindex="-1">
+            <span class="tab__label">Exercise 4.4</span>
+            <span class="tab__sub">Load the CSV</span>
+          </button>
+          <button class="tab" type="button" id="tab-4-5" role="tab"
+                  aria-selected="false" aria-controls="panel-4-5" data-tab="ex-4-5" tabindex="-1">
+            <span class="tab__label">Exercise 4.5</span>
+            <span class="tab__sub">Bind and draw</span>
+          </button>
+          <button class="tab" type="button" id="tab-4-6" role="tab"
+                  aria-selected="false" aria-controls="panel-4-6" data-tab="ex-4-6" tabindex="-1">
+            <span class="tab__label">Exercise 4.6</span>
+            <span class="tab__sub">Add scales</span>
+          </button>
+          <button class="tab" type="button" id="tab-4-7" role="tab"
+                  aria-selected="false" aria-controls="panel-4-7" data-tab="ex-4-7" tabindex="-1">
+            <span class="tab__label">Exercise 4.7</span>
+            <span class="tab__sub">Add labels</span>
+          </button>
+        </div>
+
+        <!-- ===== 4.3 ===== -->
+        <div class="tab-panel" id="panel-4-3" role="tabpanel" aria-labelledby="tab-4-3" tabindex="0">
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Set up D3 and a responsive canvas</h3>
+              <p>
+                D3 loads from its CDN before the exercise code. The code
+                appends an SVG with a <code>viewBox</code>, so the canvas
+                scales with its container, then draws one hard-coded test
+                rectangle to prove the setup works.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%204/Exercise%204.3/index.html">Open original</a>
+          </div>
+
+          <div class="viz">
+            <figure class="chart-card">
+              <div id="chart-4-3" class="chart chart--portrait" role="img"
+                   aria-label="An empty 1200 by 1600 SVG canvas with one small teal test bar near the top-left corner."></div>
+              <figcaption>
+                The whole 1200 × 1600 canvas, outlined, with the 414 × 16
+                test bar near its top-left corner.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--spec" aria-label="Exercise 4.3 canvas specification">
+              <h3>Canvas spec</h3>
+              <div class="readout__row">
+                <span class="readout__label">viewBox</span>
+                <span class="readout__value readout__value--text">0 0 1200 1600</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Test bar position</span>
+                <span class="readout__value readout__value--text">x 10 · y 10</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Test bar size</span>
+                <span class="readout__value readout__value--text">414 × 16</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Data</span>
+                <span class="readout__value readout__value--text">none yet</span>
+              </div>
+              <p class="readout__note">
+                Every value is typed into the code. From Exercise 4.4 the
+                chart starts reading its numbers from a CSV file.
+              </p>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/ex4-3.js</summary>
+<pre><code>const svg = d3.select("#chart-4-3")
+    .append("svg")
+        .attr("viewBox", "0 0 1200 1600")
+        <span class="hl">.attr("class", "chart-canvas");   // was .style("border", "1px solid black")</span>
+
+svg.append("rect")
+    .attr("x", 10)
+    .attr("y", 10)
+    .attr("width", 414)
+    .attr("height", 16)
+    <span class="hl">.attr("fill", THEME.teal);        // was "blue"</span></code></pre>
+          </details>
+        </div>
+
+        <!-- ===== 4.4 ===== -->
+        <div class="tab-panel" id="panel-4-4" role="tabpanel" aria-labelledby="tab-4-4" tabindex="0" hidden>
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Load and type the CSV</h3>
+              <p>
+                <code>d3.csv()</code> reads <code>tvBrandCount.csv</code>,
+                and a row-conversion function turns each count from text
+                into a number. The rows are sorted from most to fewest
+                models and passed to a placeholder <code>drawBarChart()</code>,
+                so the canvas stays empty: this step's output is in the
+                console, repeated in the read-out.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%204/Exercise%204.4/index.html">Open original</a>
+          </div>
+
+          <div class="viz">
+            <figure class="chart-card">
+              <div id="chart-4-4" class="chart chart--portrait" role="img"
+                   aria-label="An empty 1200 by 1600 SVG canvas. No bars are drawn in this step."></div>
+              <figcaption>
+                Still an empty canvas. The data is loaded, checked and
+                sorted, then logged rather than drawn.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--spec" aria-label="Exercise 4.4 console output">
+              <h3>Console output</h3>
+              <div class="readout__row">
+                <span class="readout__label">Rows loaded</span>
+                <span class="readout__value" data-readout="rows">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Max count</span>
+                <span class="readout__value" data-readout="max">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Min count</span>
+                <span class="readout__value" data-readout="min">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Extent [min, max]</span>
+                <span class="readout__value" data-readout="extent">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">First after sorting</span>
+                <span class="readout__value readout__value--text" data-readout="top-brand">—</span>
+              </div>
+              <p class="readout__note">
+                The same values <code>ex4-4.js</code> writes with
+                <code>console.log</code>, read live from the CSV.
+              </p>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/ex4-4.js</summary>
+<pre><code>d3.csv("data/tvBrandCount.csv", d =&gt; {
+    return {
+        brand: d.brand,
+        count: +d.count      <span class="c">// the + converts the text "44" into the number 44</span>
+    };
+}).then(data =&gt; {
+    console.log("rows:", data.length);
+    console.log("extent [min, max]:", d3.extent(data, d =&gt; d.count));
+
+    data.sort((a, b) =&gt; d3.descending(a.count, b.count));
+    drawBarChart(data);   <span class="c">// placeholder: logs, draws nothing yet</span>
+});</code></pre>
+          </details>
+        </div>
+
+        <!-- ===== 4.5 ===== -->
+        <div class="tab-panel" id="panel-4-5" role="tabpanel" aria-labelledby="tab-4-5" tabindex="0" hidden>
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Bind the data and draw the bars</h3>
+              <p>
+                <code>selectAll("rect").data(data).join("rect")</code>
+                creates one rectangle per brand. Each bar's width is its
+                raw count in pixels and its position comes from its index,
+                so the chart only fits by luck: Samsung's 1,096 models
+                almost fill the 1,200-wide canvas, and the bars use about
+                half of its height.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%204/Exercise%204.5/index.html">Open original</a>
+          </div>
+
+          <div class="viz">
+            <figure class="chart-card">
+              <div id="chart-4-5" class="chart chart--portrait" role="img"
+                   aria-label="Twenty-five unlabelled teal bars stacked down the top half of a tall canvas, longest first."></div>
+              <figcaption>
+                One bar per brand, sorted longest first, drawn in raw
+                pixels on the same 1200 × 1600 canvas.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--spec" aria-label="Exercise 4.5 drawing rules">
+              <h3>Drawing rules</h3>
+              <div class="readout__row">
+                <span class="readout__label">Bars drawn</span>
+                <span class="readout__value" data-readout="bars">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Bar height · gap</span>
+                <span class="readout__value">20 · 12</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Widest bar</span>
+                <span class="readout__value readout__value--text" data-readout="widest-raw">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Height used</span>
+                <span class="readout__value readout__value--text" data-readout="height-used">—</span>
+              </div>
+              <p class="readout__note">
+                Width = count and y = index × 32, both in canvas units.
+                Change the canvas and the chart no longer fits.
+              </p>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/ex4-5.js</summary>
+<pre><code>svg
+    .selectAll("rect")
+    .data(data)
+    .join("rect")
+    .attr("x", 0)
+    .attr("y", (d, i) =&gt; i * (barHeight + spacing))   <span class="c">// 20 + 12</span>
+    .attr("width", d =&gt; d.count)                      <span class="c">// raw pixels</span>
+    .attr("height", barHeight)
+    <span class="hl">.attr("fill", THEME.teal);                        // was "blue"</span></code></pre>
+          </details>
+        </div>
+
+        <!-- ===== 4.6 ===== -->
+        <div class="tab-panel" id="panel-4-6" role="tabpanel" aria-labelledby="tab-4-6" tabindex="0" hidden>
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Fit the chart with scales</h3>
+              <p>
+                A linear scale maps counts from 0–1,200 onto 0–400 units of
+                width, and a band scale splits the 600-unit height into one
+                band per brand with 20% padding. The canvas shrinks to
+                500 × 600 and the bars still fit, because their size now
+                comes from the scales instead of raw pixels.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%204/Exercise%204.6/index.html">Open original</a>
+          </div>
+
+          <div class="viz">
+            <figure class="chart-card">
+              <div id="chart-4-6" class="chart chart--square" role="img"
+                   aria-label="Twenty-five unlabelled teal bars filling a 500 by 600 canvas, longest first."></div>
+              <figcaption>
+                The same 25 bars, now sized by scales to fill a
+                500 × 600 canvas.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--spec" aria-label="Exercise 4.6 scales">
+              <h3>Scales</h3>
+              <div class="readout__row">
+                <span class="readout__label">x · linear</span>
+                <span class="readout__value readout__value--text">[0, 1200] → [0, 400]</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">y · band</span>
+                <span class="readout__value readout__value--text"><span data-readout="rows">25</span> brands → [0, 600]</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Padding</span>
+                <span class="readout__value">0.2</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Bandwidth</span>
+                <span class="readout__value" data-readout="bandwidth">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Widest bar</span>
+                <span class="readout__value readout__value--text" data-readout="widest-scaled">—</span>
+              </div>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/ex4-6.js</summary>
+<pre><code>const xScale = d3.scaleLinear()
+    .domain([0, 1200])
+    .range([0, 400]);
+
+const yScale = d3.scaleBand()
+    .domain(data.map(d =&gt; d.brand))
+    .range([0, 600])
+    .padding(0.2);
+
+<span class="c">// ...inside the data join</span>
+    .attr("y", d =&gt; yScale(d.brand))
+    .attr("width", d =&gt; xScale(d.count))
+    .attr("height", yScale.bandwidth())</code></pre>
+          </details>
+        </div>
+
+        <!-- ===== 4.7 ===== -->
+        <div class="tab-panel" id="panel-4-7" role="tabpanel" aria-labelledby="tab-4-7" tabindex="0" hidden>
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Group each bar with its labels</h3>
+              <p>
+                Each brand gets a <code>&lt;g&gt;</code> group translated to
+                its band. Inside the group the bar starts at x = 100 to
+                leave room for the brand name, which is right-aligned with
+                <code>text-anchor: end</code>, and the count sits 5 units
+                past the end of the bar.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%204/Exercise%204.7/index.html">Open original</a>
+          </div>
+
+          <div class="viz">
+            <figure class="chart-card">
+              <div id="chart-4-7" class="chart chart--square chart--labels" role="img"
+                   aria-label="Horizontal bar chart of TV models by brand. Samsung leads with 1,096 models, then Kogan with 788 and LG with 677; Skyworth and Walton have the fewest with 24 each."></div>
+              <figcaption>
+                Number of TV models sold in Australia, by brand. Each row is
+                one <code>&lt;g&gt;</code> holding a bar and two labels.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--spec" aria-label="Exercise 4.7 layout">
+              <h3>Layout</h3>
+              <div class="readout__row">
+                <span class="readout__label">Label space</span>
+                <span class="readout__value">100</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">x range</span>
+                <span class="readout__value readout__value--text">[0, 340]</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Rows</span>
+                <span class="readout__value readout__value--text" data-readout="groups">—</span>
+              </div>
+              <div class="readout__row">
+                <span class="readout__label">Longest bar ends at</span>
+                <span class="readout__value readout__value--text" data-readout="bar-end">—</span>
+              </div>
+              <p class="readout__note">
+                The x range dropped from 400 to 340 so the label space, the
+                longest bar and its count all fit inside 500 units.
+              </p>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/ex4-7.js</summary>
+<pre><code>const barAndLabel = svg
+    .selectAll("g")
+    .data(data)
+    .join("g")
+        .attr("transform", d =&gt; `translate(0, ${yScale(d.brand)})`);
+
+barAndLabel.append("rect")
+    .attr("x", labelSpace)       <span class="c">// 100 units reserved for the brand name</span>
+    .attr("y", 0)                <span class="c">// the group already sets the row</span>
+    .attr("width", d =&gt; xScale(d.count))
+    .attr("height", yScale.bandwidth());
+
+barAndLabel.append("text")
+    .text(d =&gt; d.brand)
+    .attr("x", labelSpace - 10)
+    .attr("text-anchor", "end");</code></pre>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ KEY NUMBERS (cloned card grid) ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">What the data says</p>
+        <h2>Three numbers worth knowing</h2>
+
+        <div class="grid">
+          <article class="card">
+            <span class="card__figure" data-readout="top-count">1,096</span>
+            <h3>Samsung models</h3>
+            <p>
+              Samsung lists more TV models than any other brand:
+              <span data-readout="top-share">26%</span> of the
+              <span data-readout="model-total">4,240</span> models counted.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure" data-readout="top-three-share">60%</span>
+            <h3>Three brands lead</h3>
+            <p>
+              Samsung, Kogan and LG together list more models than the
+              other 22 brands combined.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure" data-readout="brand-count">25</span>
+            <h3>Brands in the file</h3>
+            <p>
+              The smallest, Skyworth and Walton, list just
+              <span data-readout="min">24</span> models each.
+            </p>
+          </article>
+        </div>
+
+        <p class="note note--spaced">
+          Calculated live from <code>data/tvBrandCount.csv</code>, the file
+          every exercise on this page loads. See the full table on the
+          <a href="data.html">Data</a> page.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ACCORDION (cloned component) ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Reading the progression</p>
+        <h2>FAQ</h2>
+
+        <div class="faq">
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-1" id="faq-btn-1">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why does the Exercise 4.5 chart only fill half its canvas?
+            </button>
+            <div class="faq__answer" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" hidden>
+              <p>
+                In 4.5 a bar's width is its count in canvas units and its
+                y position is its index × 32. That only works because the
+                canvas (1,200 wide) happens to be wider than the biggest
+                count (1,096), and the 25 bars stop at y = 788, about half
+                way down the 1,600-unit canvas. Exercise 4.6 fixes both
+                with scales.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              What is the difference between scaleLinear and scaleBand?
+            </button>
+            <div class="faq__answer" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
+              <p>
+                A linear scale maps a continuous domain onto a continuous
+                range: here, counts from 0 to 1,200 onto 0 to 400 units of
+                width. A band scale divides a range into equal bands, one
+                per category, and gives each band a start position and a
+                bandwidth; <code>padding(0.2)</code> turns 20% of each step
+                into a gap.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why do the bars and labels sit inside &lt;g&gt; groups in 4.7?
+            </button>
+            <div class="faq__answer" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
+              <p>
+                Each group is translated to its brand's band, so the bar
+                and both labels inside it are drawn relative to that row.
+                That is why the bar's y can be 0: the group has already
+                moved it into place, and moving the group moves all three
+                together.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why is each exercise wrapped in a function on this page?
+            </button>
+            <div class="faq__answer" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
+              <p>
+                In the original folders each exercise has a page to itself.
+                Here five of them share one page, and each file declares
+                <code>svg</code> (and, from 4.4 on, <code>drawBarChart</code>).
+                Without separate scopes the second file would stop with
+                "Identifier 'svg' has already been declared". Wrapping each
+                file in a function keeps those names private; inside it,
+                only the container and the colours changed.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (same on every page of this hub) ============ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="current-year">2026</span> <strong>Lynn Myat Bhone Htut</strong> — Appliance Energy Consumption Website · Exercise 4 hub.</p>
+      <p>Built for COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p>
+        <strong>Generative AI acknowledgement:</strong> this hub was assembled
+        and restyled with the help of a generative AI tool (Claude). The D3
+        chart code is the author's own Exercise 4 work.
+      </p>
+    </div>
+  </footer>
+
+  <!-- D3 first, then the theme bridge, then the exercises in order -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="js/ex4-3.js"></script>
+  <script src="js/ex4-4.js"></script>
+  <script src="js/ex4-5.js"></script>
+  <script src="js/ex4-6.js"></script>
+  <script src="js/ex4-7.js"></script>
+  <script src="assets/js/hub-readouts.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/faq.js"></script>
+  <script src="assets/js/tabs.js"></script>
+</body>
+</html>

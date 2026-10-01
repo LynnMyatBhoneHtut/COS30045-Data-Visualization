@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 6 Hub | Appliance Energy Consumption</title>
+  <meta name="description" content="COS30045 Exercise 6: an interactive histogram with screen-technology filters and a scatterplot with tooltips, in the Appliance Energy Consumption theme.">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION (same on every page of this hub) ============ -->
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <!-- Logo links back to the Home page -->
+      <a class="nav__logo" href="index.html">
+        <img src="assets/img/PowerIcon.png" alt="Appliance Energy Consumption home">
+        <span class="nav__wordmark">
+          Appliance Energy
+          <span>Consumption AU</span>
+        </span>
+      </a>
+      <ul class="nav__links">
+        <!-- aria-current marks the active page; CSS styles it -->
+        <li><a class="nav__link" href="index.html" aria-current="page">Home</a></li>
+        <li><a class="nav__link" href="data.html">Data</a></li>
+        <li><a class="nav__link" href="about.html">About</a></li>
+        <li><a class="nav__link" href="../index.html">All sites</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Exercise 6 · Interactive visualisations</p>
+        <h1>Filter the histogram. Hover the dots.</h1>
+        <p class="hero__lead">
+          Two interactive views of the televisions on sale in Australia: a
+          histogram of labelled energy use that you can filter by screen
+          technology, and a scatterplot of energy use against star rating
+          that shows each model's screen size when you hover over it.
+        </p>
+
+        <!-- Signature element, cloned from Exercise 0.2: the meter-style
+             scale, relabelled with the four parts of the exercise. -->
+        <div class="scale" aria-hidden="true">
+          <div class="scale__ticks">
+            <div class="scale__tick scale__tick--low"  style="height: 14%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 22%"></div>
+            <div class="scale__tick scale__tick--low"  style="height: 31%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 44%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 52%"></div>
+            <div class="scale__tick scale__tick--mid"  style="height: 61%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 78%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 90%"></div>
+            <div class="scale__tick scale__tick--high" style="height: 100%"></div>
+          </div>
+          <p class="scale__legend">
+            <span>6.1 Histogram · 6.2 Filters</span>
+            <span>6.3 Scatterplot</span>
+            <span>6.4 Tooltip</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXERCISE TABS ============ -->
+    <section class="section section--tabs" id="exercises">
+      <div class="wrap">
+        <p class="eyebrow">Step through the exercises</p>
+        <h2>Exercises 6.1 to 6.4</h2>
+
+        <div class="tabs" role="tablist" aria-label="Exercise 6 charts">
+          <button class="tab" type="button" id="tab-6-1" role="tab"
+                  aria-selected="true" aria-controls="panel-6-1" data-tab="ex-6-1">
+            <span class="tab__label">Exercise 6.1 · 6.2</span>
+            <span class="tab__sub">Histogram and filters</span>
+          </button>
+          <button class="tab" type="button" id="tab-6-3" role="tab"
+                  aria-selected="false" aria-controls="panel-6-3" data-tab="ex-6-3" tabindex="-1">
+            <span class="tab__label">Exercise 6.3 · 6.4</span>
+            <span class="tab__sub">Scatterplot and tooltip</span>
+          </button>
+        </div>
+
+        <!-- ===== 6.1 + 6.2 ===== -->
+        <div class="tab-panel" id="panel-6-1" role="tabpanel" aria-labelledby="tab-6-1" tabindex="0">
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Energy use for different screen types</h3>
+              <p>
+                Most TVs on sale in Australia are LED, and they vary
+                considerably in energy consumption. The histogram (6.1)
+                groups every model into 200 kWh bins; the buttons (6.2)
+                filter it by screen technology, and the bars grow or shrink
+                in place with a 500 ms transition.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%206/index.html">Open original</a>
+          </div>
+
+          <!-- Exercise 6.2: filter buttons for screen technology
+               (interactions.js creates the buttons inside #filters_screen) -->
+          <div class="filter-row">
+            <p class="filter-row__label" id="filter-label">Screen technology</p>
+            <div id="filters_screen" role="group" aria-labelledby="filter-label"></div>
+          </div>
+
+          <div class="viz viz--stack">
+            <figure class="chart-card">
+              <!-- Exercise 6.1: histogram -->
+              <div id="histogram" class="responsive-svg-container chart" role="img"
+                   aria-label="Histogram of labelled energy consumption for TV models, in 200 kWh bins from 0 to 2,800 kWh. Most models use between 200 and 600 kWh a year; very few use more than 1,000."></div>
+              <figcaption>
+                Number of TV models by labelled energy consumption
+                (kWh per year). The y-axis keeps the scale set for all
+                screens, so filtered views compare directly.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--strip" aria-label="Histogram values for the current filter" aria-live="polite">
+              <div class="readout__grid">
+                <div class="readout__row">
+                  <span class="readout__label">Showing</span>
+                  <span class="readout__value" data-readout="filter-name">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Models</span>
+                  <span class="readout__value" data-readout="filter-count">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Median energy</span>
+                  <span class="readout__value" data-readout="filter-median">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Bins</span>
+                  <span class="readout__value" data-readout="bins">—</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/interactions.js</summary>
+<pre><code>const updateHistogram = (filterId, data) =&gt; {
+
+    <span class="c">// 1. Filter the data (no filter when "all" is selected)</span>
+    const updatedData = filterId === "all"
+        ? data
+        : data.filter(tv =&gt; tv.screenTech === filterId);
+
+    <span class="c">// 2. Use the filtered data to update the bins</span>
+    const updatedBins = binGenerator(updatedData);
+
+    <span class="c">// 3. Redraw the histogram bars with a transition</span>
+    d3.selectAll("#histogram rect")
+        .data(updatedBins)
+        .transition()
+        .duration(500)
+        .ease(d3.easeCubicInOut)
+        .attr("y", d =&gt; yScale(d.length))
+        .attr("height", d =&gt; innerHeight - yScale(d.length));
+};</code></pre>
+          </details>
+        </div>
+
+        <!-- ===== 6.3 + 6.4 ===== -->
+        <div class="tab-panel" id="panel-6-3" role="tabpanel" aria-labelledby="tab-6-3" tabindex="0" hidden>
+          <div class="panel-head">
+            <div class="panel-head__text">
+              <h3>Energy consumption by star rating</h3>
+              <p>
+                Each dot is one TV model, coloured by screen technology
+                (6.3). Hover over a dot to see its screen size in inches
+                (6.4): the tooltip moves above the dot you point at and
+                fades out when you leave it.
+              </p>
+            </div>
+            <a class="mini-btn" href="../../Exercise%206/index.html">Open original</a>
+          </div>
+
+          <div class="viz viz--stack">
+            <figure class="chart-card">
+              <!-- Exercise 6.3: scatterplot (Exercise 6.4 adds the tooltip) -->
+              <div id="scatterplot" class="responsive-svg-container chart" role="img"
+                   aria-label="Scatterplot of labelled energy consumption against star rating for each TV model, coloured by screen technology. Models with more stars generally use less energy."></div>
+              <figcaption>
+                Labelled energy consumption (kWh per year) against star
+                rating. Dots are 50% opaque, so darker areas hold more
+                models.
+              </figcaption>
+            </figure>
+
+            <aside class="readout readout--strip" aria-label="Scatterplot colour key and counts">
+              <div class="readout__grid">
+                <div class="readout__row">
+                  <span class="readout__label"><span class="key key--series-1" data-key="LED" aria-hidden="true"></span>LED</span>
+                  <span class="readout__value" data-readout="tech-LED">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label"><span class="key key--series-2" data-key="LCD" aria-hidden="true"></span>LCD</span>
+                  <span class="readout__value" data-readout="tech-LCD">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label"><span class="key key--series-3" data-key="OLED" aria-hidden="true"></span>OLED</span>
+                  <span class="readout__value" data-readout="tech-OLED">—</span>
+                </div>
+                <div class="readout__row">
+                  <span class="readout__label">Star ratings</span>
+                  <span class="readout__value" data-readout="star-range">—</span>
+                </div>
+              </div>
+              <p class="readout__note">Models of each screen type. Hover a dot for its screen size.</p>
+            </aside>
+          </div>
+
+          <details class="code">
+            <summary>Key code · js/interactions.js</summary>
+<pre><code>innerChartS.selectAll("circle")
+    .on("mouseenter", (e, d) =&gt; {
+        d3.select(".tooltip text")
+            .text(d.screenSize);
+
+        const cx = e.target.getAttribute("cx");
+        const cy = e.target.getAttribute("cy");
+
+        d3.select(".tooltip")
+            .attr("transform", `translate(${cx - 0.5 * tooltipWidth}, ${cy - 1.5 * tooltipHeight})`)
+            .transition()
+            .duration(200)
+            .style("opacity", 1);
+    })
+    .on("mouseleave", (e, d) =&gt; {
+        d3.select(".tooltip")
+            .style("opacity", 0)
+            .attr("transform", `translate(0, 500)`);
+    });</code></pre>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ KEY NUMBERS (cloned card grid) ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">What the data says</p>
+        <h2>Three numbers worth knowing</h2>
+
+        <div class="grid">
+          <article class="card">
+            <span class="card__figure" data-readout="model-total">4,233</span>
+            <h3>TV models plotted</h3>
+            <p>
+              Every model in the data set is one dot in the scatterplot and
+              one count in the histogram.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure" data-readout="led-share">82%</span>
+            <h3>Are LED</h3>
+            <p>
+              LED dominates the range, which is why the "LED" view of the
+              histogram looks so much like "All".
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__figure" data-readout="median-all">400 kWh</span>
+            <h3>Median energy use</h3>
+            <p>
+              Half of all models are labelled at this many kilowatt-hours a
+              year or less.
+            </p>
+          </article>
+        </div>
+
+        <p class="note note--spaced">
+          Data source:
+          <a href="https://www.energyrating.gov.au/" target="_blank" rel="noopener">Energy Rating Data for household appliances – Televisions</a>,
+          downloaded January 2026. Figures above are calculated live from
+          <code>data/Ex6_TVdata_withStar.csv</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ACCORDION (cloned component) ============ -->
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Reading the charts</p>
+        <h2>FAQ</h2>
+
+        <div class="faq">
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-1" id="faq-btn-1">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              How are the histogram's bins chosen?
+            </button>
+            <div class="faq__answer" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" hidden>
+              <p>
+                <code>d3.bin()</code> with its default thresholds splits all
+                4,233 models into 14 bins, each 200 kWh wide, from 0 to
+                2,800 kWh. <code>histogram.js</code> then fixes the bin
+                generator to those same thresholds, so filtered data falls
+                into identical bins and every bar keeps its place on the
+                x-axis.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why doesn't the y-axis change when I filter?
+            </button>
+            <div class="faq__answer" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
+              <p>
+                <code>updateHistogram()</code> only moves each bar's
+                <code>y</code> and <code>height</code>; the y scale keeps
+                the domain it was given for all screens. Every filtered view
+                is drawn against the same axis, so LCD and OLED look small
+                because they really are much smaller groups.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              Why are the dots see-through?
+            </button>
+            <div class="faq__answer" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
+              <p>
+                Thousands of dots share the same few star ratings, so they
+                overlap heavily. At 50% opacity, places where many models
+                sit on top of each other build up a darker colour, which
+                shows where the data is concentrated.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button"
+                    aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+              <span class="faq__marker" aria-hidden="true">+</span>
+              How does the tooltip find the dot?
+            </button>
+            <div class="faq__answer" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
+              <p>
+                On <code>mouseenter</code> the code reads the circle's
+                <code>cx</code> and <code>cy</code>, writes the model's
+                screen size into the tooltip text, and translates the
+                tooltip group so it sits centred above the dot. On
+                <code>mouseleave</code> it fades the tooltip out and moves it
+                below the chart, out of the way of the next dot.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (same on every page of this hub) ============ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="current-year">2026</span> <strong>Lynn Myat Bhone Htut</strong> — Appliance Energy Consumption Website · Exercise 6 hub.</p>
+      <p>Built for COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p>
+        <strong>Generative AI acknowledgement:</strong> this hub was assembled
+        and restyled with the help of a generative AI tool (Claude). The D3
+        chart code is the author's own Exercise 6 work.
+      </p>
+    </div>
+  </footer>
+
+  <!-- D3 first, then the theme bridge, then the original scripts in their
+       original order (the order is important) -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="js/load-data.js"></script>
+  <script src="js/shared-constants.js"></script>
+  <script src="js/interactions.js"></script>
+  <script src="js/histogram.js"></script>
+  <script src="js/scatterplot.js"></script>
+  <script src="assets/js/hub-readouts.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/faq.js"></script>
+  <script src="assets/js/tabs.js"></script>
+</body>
+</html>

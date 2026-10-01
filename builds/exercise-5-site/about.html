@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Exercise 5 Hub | Appliance Energy Consumption</title>
+  <meta name="description" content="How the Exercise 5 hub was built from the Exercise 0.2 energy website and the Exercise 5 D3 charts.">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <a class="nav__logo" href="index.html">
+        <img src="assets/img/PowerIcon.png" alt="Appliance Energy Consumption home">
+        <span class="nav__wordmark">
+          Appliance Energy
+          <span>Consumption AU</span>
+        </span>
+      </a>
+      <ul class="nav__links">
+        <li><a class="nav__link" href="index.html">Home</a></li>
+        <li><a class="nav__link" href="data.html">Data</a></li>
+        <li><a class="nav__link" href="about.html" aria-current="page">About</a></li>
+        <li><a class="nav__link" href="../index.html">All sites</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">About</p>
+        <h1>How this hub was put together</h1>
+        <p class="hero__lead">
+          This is Site B: an independent clone of the Exercise 0.2 energy
+          website that runs the three Exercise 5 charts inside that site's
+          layout, navigation and colours. The original Exercise 5 folder is
+          untouched; everything here lives in
+          <code>builds/exercise-5-site/</code>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">The project</p>
+        <h2>Scope and intent</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Where it came from</h3>
+            <p>
+              The layout, navigation, stylesheet, logo, footer and FAQ
+              accordion are cloned from <code>Exercise 0.2/energy-webpage-v1</code>.
+              The chart code and the three CSV files come from
+              <code>Exercise 5</code>.
+            </p>
+          </article>
+          <article class="card">
+            <h3>What changed</h3>
+            <p>
+              The bars, line and axes take the theme's colours and fonts,
+              the points gain a thin ring, and the donut's categorical
+              palette becomes one teal ramp because screen size is ordered.
+              Each chart sits in its own tab.
+            </p>
+          </article>
+          <article class="card">
+            <h3>What stayed the same</h3>
+            <p>
+              Margins, viewBoxes, scales, axes, the line and pie generators,
+              the CSV paths and row conversions are the original code, and
+              <code>load-data.js</code> is copied unchanged. Lines that
+              differ are marked <code>HUB:</code>.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap">
+        <p class="eyebrow">File map</p>
+        <h2>Where each file comes from</h2>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>
+              Paths are relative to <code>builds/exercise-5-site/</code>,
+              sources to the repository root.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Hub file</th>
+                <th scope="col">Source</th>
+                <th scope="col">Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">index.html, data.html, about.html</th>
+                <td>Exercise 0.2 page structure, Exercise 5 index.html</td>
+                <td>Same header, hero, card grid, FAQ and footer; the three charts become tabs</td>
+              </tr>
+              <tr>
+                <th scope="row">assets/css/styles.css</th>
+                <td>Exercise 0.2 styles.css</td>
+                <td>Original copied unchanged at the top; a hub layer replaces Exercise 5's style.css rules</td>
+              </tr>
+              <tr>
+                <th scope="row">assets/js/site.js, faq.js</th>
+                <td>Exercise 0.2</td>
+                <td>Copied unchanged</td>
+              </tr>
+              <tr>
+                <th scope="row">assets/js/tabs.js</th>
+                <td>Exercise 3 tabs.js</td>
+                <td>Tabs matched by <code>data-tab</code>; a link to a tab scrolls it into view</td>
+              </tr>
+              <tr>
+                <th scope="row">assets/js/theme.js</th>
+                <td>New</td>
+                <td>Reads the colour tokens from styles.css for the D3 code</td>
+              </tr>
+              <tr>
+                <th scope="row">assets/js/hub-readouts.js, data-table.js, data-page.js</th>
+                <td>New</td>
+                <td>Read-out strips, key numbers and the data tables</td>
+              </tr>
+              <tr>
+                <th scope="row">js/bar-chart.js</th>
+                <td>Exercise 5 js/bar-chart.js</td>
+                <td>Bar fill from the theme</td>
+              </tr>
+              <tr>
+                <th scope="row">js/line-chart.js</th>
+                <td>Exercise 5 js/line-chart.js</td>
+                <td>Colour constants from the theme; title and subtitle classes; point rings</td>
+              </tr>
+              <tr>
+                <th scope="row">js/donut-chart.js</th>
+                <td>Exercise 5 js/donut-chart.js</td>
+                <td>Ordinal teal ramp instead of schemeSet2; label colour by contrast</td>
+              </tr>
+              <tr>
+                <th scope="row">js/load-data.js</th>
+                <td>Exercise 5 js/load-data.js</td>
+                <td>Copied unchanged</td>
+              </tr>
+              <tr>
+                <th scope="row">data/*.csv</th>
+                <td>Exercise 5 data</td>
+                <td>Copied unchanged</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap">
+        <h2>Run it locally</h2>
+        <p style="max-width: 62ch;">
+          <code>d3.csv()</code> fetches its files over HTTP, so the hub needs
+          a local web server rather than a double-click. From the
+          repository root:
+        </p>
+<pre class="code-block"><code>python3 -m http.server 8000</code></pre>
+        <p class="note note--spaced">
+          Then open <code>http://localhost:8000/builds/exercise-5-site/</code>.
+          Serving from the repository root also keeps the "Open original"
+          links working.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="current-year">2026</span> <strong>Lynn Myat Bhone Htut</strong> — Appliance Energy Consumption Website · Exercise 5 hub.</p>
+      <p>Built for COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p>
+        <strong>Generative AI acknowledgement:</strong> this hub was assembled
+        and restyled with the help of a generative AI tool (Claude). The D3
+        chart code is the author's own Exercise 5 work.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
