@@ -15,10 +15,25 @@ page as soon as it loads, one section each, in order:
 | 4.6 | Scaling charts | The same bars sized with D3 scales on a 500 × 600 canvas |
 | 4.7 | Adding labels | The finished bar chart with brand names and counts |
 
-The links in the navigation bar jump to each section. Exercise 4.1 (Draw SVGs)
+The "Jump to" links under the title go to each section. Exercise 4.1 (Draw SVGs)
 stays on its own page, unchanged, in
 [`Exercise 4/Exercise 4.1`](../Exercise%204/Exercise%204.1/); the page links to it.
 The original exercise folders are untouched.
+
+## Pages
+
+The menu on every page is **Home · Televisions · About Us · Exercise 4**, the
+same backbone as Exercise 0.2:
+
+| Menu item | File | What it is |
+|---|---|---|
+| Home | `home.html` | Exercise 0.2 `index.html` (with the calculator) |
+| Televisions | `televisions.html` | Exercise 0.2 `televisions.html` |
+| About Us | `about.html` | Exercise 0.2 `about.html` |
+| Exercise 4 | `index.html` | The exercise charts (opens first) |
+
+The three Exercise 0.2 pages are copied unchanged except for file paths
+(`assets/…`), the Home link (`home.html`) and the extra Exercise 4 menu item.
 
 ## View it
 
@@ -34,13 +49,14 @@ as with the original exercises:
 
 ```
 exercise-4-site/
-├── index.html               the page
+├── index.html               the exercise charts (opens first)
+├── home.html  televisions.html  about.html   from Exercise 0.2
 ├── README.md
 ├── assets/
 │   ├── css/styles.css       Exercise 0.2 styles.css, unchanged, + a hub layer at the end
 │   ├── img/PowerIcon.png    copied unchanged; favicon.png is a 64 px copy
 │   └── js/
-│       ├── site.js          copied unchanged (footer year)
+│       ├── site.js, faq.js, calculator.js   copied unchanged from Exercise 0.2
 │       ├── theme.js         hands the stylesheet's colours to the D3 code
 │       └── console-readout.js  shows the 4.4 console values on the page
 ├── data/tvBrandCount.csv    copied unchanged

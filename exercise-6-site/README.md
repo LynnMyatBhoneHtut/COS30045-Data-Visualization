@@ -12,8 +12,23 @@ soon as it loads, with the headings and descriptions from the original page:
 | 6.1 · 6.2 Energy Consumption for different TV screen types and sizes | Histogram of labelled energy use, with All / LED / LCD / OLED filter buttons |
 | 6.3 · 6.4 Energy Consumption by Star Rating | Scatterplot of energy use against star rating; hover a dot to see its screen size |
 
-The links in the navigation bar jump to each chart. The original
+The "Jump to" links under the title go to each chart. The original
 [`Exercise 6`](../Exercise%206/) folder is untouched.
+
+## Pages
+
+The menu on every page is **Home · Televisions · About Us · Exercise 6**, the
+same backbone as Exercise 0.2:
+
+| Menu item | File | What it is |
+|---|---|---|
+| Home | `home.html` | Exercise 0.2 `index.html` (with the calculator) |
+| Televisions | `televisions.html` | Exercise 0.2 `televisions.html` |
+| About Us | `about.html` | Exercise 0.2 `about.html` |
+| Exercise 6 | `index.html` | The exercise charts (opens first) |
+
+The three Exercise 0.2 pages are copied unchanged except for file paths
+(`assets/…`), the Home link (`home.html`) and the extra Exercise 6 menu item.
 
 ## View it
 
@@ -29,13 +44,14 @@ as with the original exercise:
 
 ```
 exercise-6-site/
-├── index.html               the page
+├── index.html               the exercise charts (opens first)
+├── home.html  televisions.html  about.html   from Exercise 0.2
 ├── README.md
 ├── assets/
 │   ├── css/styles.css       Exercise 0.2 styles.css, unchanged, + a hub layer at the end
 │   ├── img/PowerIcon.png    copied unchanged; favicon.png is a 64 px copy
 │   └── js/
-│       ├── site.js          copied unchanged (footer year)
+│       ├── site.js, faq.js, calculator.js   copied unchanged from Exercise 0.2
 │       └── theme.js         hands the stylesheet's colours to the D3 code
 ├── data/Ex6_TVdata_withStar.csv   copied unchanged
 └── js/                      shared-constants.js, load-data.js, interactions.js,
