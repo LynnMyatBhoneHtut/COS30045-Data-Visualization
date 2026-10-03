@@ -5,7 +5,11 @@ A data story about what the energy label on a television actually tells you — 
 Built for **COS30045 Data Visualisation**, Swinburne University of Technology.
 Author: Lynn Myat Bhone Htut
 
-**Live site:** `<add your GitHub Pages URL>`
+- **Live site (Mercury):** <https://mercury.swin.edu.au/cos30045/s105973835/Exercise%203/> (Swinburne login required)
+- **Source:** [Exercise 3 on GitHub](https://github.com/LynnMyatBhoneHtut/COS30045-Data-Visualization/tree/main/Exercise%203)
+
+The website has three pages: **Home** (introduction, energy calculator and FAQ),
+**Televisions** (the two data stories, one per tab) and **About Us**.
 
 ---
 
@@ -72,7 +76,7 @@ In priority order:
 - Close with three actions short enough to remember on the way to the shop.
 - Contextualise every visualisation in prose — no chart is left to speak for itself.
 
-### The narrative arc
+### The narrative arc — story one: "The $2,618 gap"
 
 | Panel | Role | Content |
 |---|---|---|
@@ -84,8 +88,27 @@ In priority order:
 | 5 | The payoff | Cumulative cost over ten years, diverging to $2,618 |
 | — | Recommendation | Read the kWh, compare within your size, multiply by ten |
 
-Storyboards for the narrative and for the user's journey through the site are in
-`docs/storyboards/`.
+The storyboard for story one is `assets/img/story_one.jpg`, shown at the end of
+the story on the Televisions page.
+
+### Story two: "Does the panel matter?"
+
+The second tab asks a follow-up question the same shopper often has: is an OLED
+television a power hog? It compares the three panel technologies, first across
+all 4,724 registered models and then within each size class.
+
+| Panel | Role | Content |
+|---|---|---|
+| 1 | The issue | OLED averages 486 kWh a year against 335 for LCD, a 45 per cent gap (LED-LCD 455) |
+| 2 | The twist | The average OLED is 64.5 inches, against 50.7 for LCD and 59.3 for LED-LCD |
+| 3 | The explanation | Size drives energy use: small LCD sets average 135 kWh, large LCD sets 660 |
+| 4 | The size-matched comparison | Among large sets OLED (716 kWh) beats LED-LCD (757); the medium class is a near tie (LCD 385, OLED 391, LED-LCD 407) |
+| 5 | The payoff | Once size is held constant, the gap is worth about $13 a year, against $262 between two 65-inch sets in story one |
+| 6 | Recommendation | Pick the panel on picture, not power; settle your size first; then compare individual models |
+
+The small-screen OLED figure (233 kWh) rests on only 19 models, and the page
+says it should be read as indicative only. The storyboard for story two is
+`assets/img/story_two.jpg`.
 
 ---
 
@@ -108,8 +131,8 @@ The data is published under an open licence for public reuse.
 
 ### Data processing
 
-All preparation was done in **KNIME Analytics Platform**. The workflow is
-available in this repository at `docs/knime/`.
+All preparation was done in **KNIME Analytics Platform**. The workflow file is
+not included in this repository.
 
 Steps applied:
 
@@ -128,7 +151,9 @@ Steps applied:
    annual figure × 10.
 7. **Aggregation** — medians by size and by star rating; correlations between
    screen size and energy use, and between star rating and energy use.
-8. **Export** — the summary tables behind each chart are in `assets/data/` as CSV.
+8. **Export** — the summary tables behind each chart were exported as CSV (not
+   included in this repository). The charts on the Televisions page are the PNG
+   images in `assets/img/`.
 
 Where the story quotes a "median" rather than a "mean", that is deliberate: the
 distribution of energy consumption is right-skewed by a small number of very large
@@ -211,7 +236,6 @@ Generative AI tools were used in producing this project. Their use is set out be
 | Tool | How it was used |
 |---|---|
 | Claude (Anthropic) | Guidance on KNIME node selection and configuration during data preparation; scaffolding the initial HTML and CSS for the website; drafting and structuring sections of this README; reviewing the narrative arc of the data story |
-| `<add others if used>` | `<describe>` |
 
 **What the AI tools did not do:**
 
@@ -227,25 +251,35 @@ by hand (for example, 1,135 kWh × $0.32 = $363.20 per year, × 10 = $3,632).
 
 ---
 
-## Repository structure
+## Folder structure
 
 ```
-/
-├── index.html              Home
-├── televisions.html        The data story
-├── about.html              About us
+Exercise 3/
+├── index.html                      Home: introduction, energy calculator, FAQ
+├── televisions.html                The two data stories, one per tab
+├── about.html                      About Us
 ├── assets/
-│   ├── css/styles.css
-│   ├── js/site.js
-│   ├── img/                Charts and site images
-│   └── data/               Summary CSVs behind each chart
-├── docs/
-│   ├── storyboards/        Story arc and user journey storyboards
-│   └── knime/              KNIME workflow (.knwf)
+│   ├── css/styles.css              All styling for the site
+│   ├── js/
+│   │   ├── site.js                 Footer year, used by every page
+│   │   ├── faq.js                  FAQ accordion on the Home page
+│   │   ├── calculator.js           Energy calculator on the Home page
+│   │   └── tabs.js                 Story one / story two tabs on the Televisions page
+│   └── img/
+│       ├── PowerIcon.png           Site logo
+│       ├── chart-cost-by-size.png          Story one, panel 1
+│       ├── chart-65inch-spread.png         Story one, panel 2
+│       ├── chart-cumulative-cost.png       Story one, panel 5
+│       ├── story2-chart1-energy-by-tech.png  Story two, panel 1
+│       ├── story2-chart2-size-by-tech.png    Story two, panel 2
+│       ├── story2-chart3-tech-by-size.png    Story two, panel 3
+│       ├── story_one.jpg           Storyboard for story one
+│       └── story_two.jpg           Storyboard for story two
 └── README.md
 ```
 
 ## Running locally
 
 No build step. Clone the repository and open `index.html` in a browser, or serve
-the folder with any static server.
+the folder with any static server (for example VS Code's Live Server, or
+`python3 -m http.server 8000`).

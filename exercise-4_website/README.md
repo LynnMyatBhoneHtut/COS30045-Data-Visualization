@@ -2,6 +2,9 @@
 
 COS30045 Data Visualisation · Lynn Myat Bhone Htut
 
+- **Live on Mercury:** <https://mercury.swin.edu.au/cos30045/s105973835/Submission/exercise-4_website/> (Swinburne login required)
+- **Source on GitHub:** [exercise-4_website](https://github.com/LynnMyatBhoneHtut/COS30045-Data-Visualization/tree/main/exercise-4_website)
+
 Exercises **4.3 to 4.7** combined into one page in the style of
 [`Exercise 0.2/energy-webpage-v1`](../Exercise%200.2/energy-webpage-v1/) (same
 header, navigation, colours, fonts and footer). Every exercise output is on the
@@ -16,9 +19,8 @@ page as soon as it loads, one section each, in order:
 | 4.7 | Adding labels | The finished bar chart with brand names and counts |
 
 The "Jump to" links under the title go to each section. Exercise 4.1 (Draw SVGs)
-stays on its own page, unchanged, in
-[`Exercise 4/Exercise 4.1`](../Exercise%204/Exercise%204.1/); the page links to it.
-The original exercise folders are untouched.
+stays on its own page in [`Exercise 4/Exercise 4.1`](../Exercise%204/Exercise%204.1/);
+the page links to it. The original exercise code is unchanged.
 
 ## Pages
 
@@ -41,14 +43,14 @@ The three Exercise 0.2 pages are copied unchanged except for file paths
 as with the original exercises:
 
 - **VS Code Live Server:** open the repository folder, click *Go Live*, then go
-  to <http://127.0.0.1:5500/exercise-4-site/>.
+  to <http://127.0.0.1:5500/exercise-4_website/>.
 - **Terminal:** from the repository root run `python3 -m http.server 8000`, then
-  open <http://localhost:8000/exercise-4-site/>.
+  open <http://localhost:8000/exercise-4_website/>.
 
 ## Folder structure
 
 ```
-exercise-4-site/
+exercise-4_website/
 ├── index.html               the exercise charts (opens first)
 ├── home.html  televisions.html  about.html   from Exercise 0.2
 ├── README.md
@@ -82,17 +84,17 @@ original file declares `svg` and `drawBarChart` at the top level.
 The reused files were copied with `cp -n`, which never overwrites anything:
 
 ```bash
-mkdir -p exercise-4-site/assets/css exercise-4-site/assets/js exercise-4-site/assets/img \
-         exercise-4-site/data exercise-4-site/js
-cp -n "Exercise 0.2/energy-webpage-v1/PowerIcon.png" exercise-4-site/assets/img/
-cp -n "Exercise 0.2/energy-webpage-v1/site.js" exercise-4-site/assets/js/
-cp -n "Exercise 4/Exercise 4.7/data/tvBrandCount.csv" exercise-4-site/data/
+mkdir -p exercise-4_website/assets/css exercise-4_website/assets/js exercise-4_website/assets/img \
+         exercise-4_website/data exercise-4_website/js
+cp -n "Exercise 0.2/energy-webpage-v1/PowerIcon.png" exercise-4_website/assets/img/
+cp -n "Exercise 0.2/energy-webpage-v1/site.js" exercise-4_website/assets/js/
+cp -n "Exercise 4/Exercise 4.7/data/tvBrandCount.csv" exercise-4_website/data/
 git status --short    # only the new folder appears; no existing file is modified
 ```
 
 ## Related
 
-- [Exercise 5 website](../exercise-5-site/) · [Exercise 6 website](../exercise-6-site/)
+- [Exercise 5 website](../exercise-5_website/) · [Exercise 6 website](../exercise-6_website/)
 - Originals: [4.1](../Exercise%204/Exercise%204.1/) · [4.3](../Exercise%204/Exercise%204.3/) ·
   [4.4](../Exercise%204/Exercise%204.4/) · [4.5](../Exercise%204/Exercise%204.5/) ·
   [4.6](../Exercise%204/Exercise%204.6/) · [4.7](../Exercise%204/Exercise%204.7/)

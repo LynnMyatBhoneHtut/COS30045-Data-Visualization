@@ -1,65 +1,63 @@
 # Exercise 6 – Interactive Visualisations
 
-## Overview
-In this exercise you will build **interactive data visualisations using D3.js**. Interaction allows users to explore the data and gain deeper insights through features such as filtering and tooltips.
+Two interactive D3.js charts of the televisions on sale in Australia: a histogram of
+labelled energy use that can be filtered by screen technology, and a scatterplot of
+energy use against star rating with a tooltip that shows each model's screen size.
 
-Use the **same repository you forked earlier for this unit** and complete this exercise inside the **Exercise 6 folder**.
+- **Live on Mercury:** <https://mercury.swin.edu.au/cos30045/s105973835/Exercise%206/> (Swinburne login required)
+- **In the website's design:** [exercise-6_website](../exercise-6_website/), live at <https://mercury.swin.edu.au/cos30045/s105973835/Submission/exercise-6_website/>
 
----
+## What's on the page
 
-## Exercise 6.1 – Interactive Histogram: Filtering
+| Part | Feature | How it works |
+|---|---|---|
+| 6.1 | Histogram | `d3.bin()` groups the 4,233 models into 14 bins of 200 kWh, from 0 to 2,800 kWh a year. The bins are then fixed, so filtered data falls into the same bins and every bar keeps its place. |
+| 6.2 | Filters | Buttons for **All**, **LED**, **LCD** and **OLED**. Clicking one filters the data, re-bins it and moves the bars to their new heights with a 500 ms transition. The y-axis keeps its scale, so the groups compare directly. |
+| 6.3 | Scatterplot | One dot per model: star rating along the x-axis, labelled energy use up the y-axis, coloured by screen technology with a legend. The dots are 50% opaque so overlaps show where models cluster. |
+| 6.4 | Tooltip | Hovering a dot shows that model's screen size in inches in a small box above it; the box fades out when the mouse leaves. |
 
-### Aim
-Build a histogram and add **interactive filters**.
+Page headings: "Energy Consumption for different TV screen types and sizes" (6.1 and
+6.2) and "Energy Consumption by Star Rating" (6.3 and 6.4).
 
-### Purpose
-Interaction is one of the key advantages of visualisations on the web. In this exercise you will build a **histogram using the TV dataset** and allow users to filter the data.
+## Files
 
-Users should be able to explore energy consumption for different TV screen technologies such as:
+```
+Exercise 6/
+├── index.html                 The page: filters, histogram, scatterplot and data source
+├── css/
+│   ├── base.css               General page styles and the filter buttons
+│   └── visualisation.css      Styles shared by both charts: responsive SVG, axes, legend, tooltip
+├── js/
+│   ├── shared-constants.js    Sizes and margins, scales, the bin generator, colours and the filter list
+│   ├── load-data.js           Loads the CSV, then draws the charts and sets up the interactions
+│   ├── histogram.js           6.1: drawHistogram()
+│   ├── interactions.js        6.2: populateFilters() and updateHistogram(); 6.4: createTooltip() and handleMouseEvents()
+│   └── scatterplot.js         6.3: drawScatterplot()
+└── data/
+    └── Ex6_TVdata_withStar.csv   4,233 TV models
+```
 
-- LCD
-- LED
-- OLED
+The scripts load in this order: `load-data.js`, `shared-constants.js`,
+`interactions.js`, `histogram.js`, `scatterplot.js`. The tooltip is set up last, after
+the scatterplot has been drawn.
 
-### Preparation
-Before starting, review:
+## Data
 
-- This week's lecture slides
-- **Chapter 7 of Dufour and Meeks (2024)**
+`Ex6_TVdata_withStar.csv` has one row per TV model, with the columns `brand`,
+`model`, `screenSize` (inches), `screenTech` (LED, LCD or OLED), `star` (star rating)
+and `energyConsumption` (labelled kWh per year).
 
----
+Source: [Energy Rating Data for household appliances – Televisions](https://www.energyrating.gov.au/), downloaded January 2026.
 
-## Exercise 6.2 – Interactive Scatterplot: Tooltips
+## Running locally
 
-### Aim
-Build a scatterplot and add **tooltips and colour coding**.
+`d3.csv()` needs a web server: use VS Code's Live Server, or run
+`python3 -m http.server 8000` from the repository root and open
+<http://localhost:8000/Exercise%206/>. D3 v7 is loaded from
+`https://d3js.org/d3.v7.min.js` and the Roboto font from Google Fonts, so an
+internet connection is needed.
 
-### Purpose
-Tooltips are one of the most common interactive features in data visualisations. In this exercise you will create a **scatterplot using the TV dataset**.
+## Reference
 
-The chart should allow users to explore the relationship between:
-
-- Energy consumption
-- Star rating
-- Screen size
-- Screen technology
-
-Tooltips should display additional information such as **screen size**, and colours should represent **screen type**.
-
-### Preparation
-Before starting, review:
-
-- This week's lecture slides
-- **Chapter 7 of Dufour and Meeks (2024)**
-
----
-
-## Instructions
-
-1. Open your **existing forked repository**.
-2. Navigate to the **Exercise 6 folder**.
-3. Add the files needed to implement the histogram and scatterplot.
-4. Implement the required interactive features using **D3.js**.
-5. Commit and push your changes regularly to GitHub.
-
-Your forked repository will serve as your **submission record**.
+The exercise brief recommends Chapter 7 of Dufour and Meeks (2024) on interactive
+visualisations.

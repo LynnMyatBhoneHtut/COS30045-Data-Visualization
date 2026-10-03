@@ -2,6 +2,9 @@
 
 COS30045 Data Visualisation · Lynn Myat Bhone Htut
 
+- **Live on Mercury:** <https://mercury.swin.edu.au/cos30045/s105973835/Submission/exercise-5_website/> (Swinburne login required)
+- **Source on GitHub:** [exercise-5_website](https://github.com/LynnMyatBhoneHtut/COS30045-Data-Visualization/tree/main/exercise-5_website)
+
 The three Exercise 5 charts combined into one page in the style of
 [`Exercise 0.2/energy-webpage-v1`](../Exercise%200.2/energy-webpage-v1/) (same
 header, navigation, colours, fonts and footer). All three charts are on the
@@ -15,7 +18,7 @@ page:
 | 5.3 Donut Chart | TV models by screen size (small, medium, large) |
 
 The "Jump to" links under the title go to each chart. The original
-[`Exercise 5`](../Exercise%205/) folder is untouched.
+[`Exercise 5`](../Exercise%205/) folder's code is unchanged.
 
 ## Pages
 
@@ -38,14 +41,14 @@ The three Exercise 0.2 pages are copied unchanged except for file paths
 as with the original exercise:
 
 - **VS Code Live Server:** open the repository folder, click *Go Live*, then go
-  to <http://127.0.0.1:5500/exercise-5-site/>.
+  to <http://127.0.0.1:5500/exercise-5_website/>.
 - **Terminal:** from the repository root run `python3 -m http.server 8000`, then
-  open <http://localhost:8000/exercise-5-site/>.
+  open <http://localhost:8000/exercise-5_website/>.
 
 ## Folder structure
 
 ```
-exercise-5-site/
+exercise-5_website/
 ├── index.html               the exercise charts (opens first)
 ├── home.html  televisions.html  about.html   from Exercise 0.2
 ├── README.md
@@ -82,18 +85,18 @@ differ are marked `HUB:`.
 The reused files were copied with `cp -n`, which never overwrites anything:
 
 ```bash
-mkdir -p exercise-5-site/assets/css exercise-5-site/assets/js exercise-5-site/assets/img \
-         exercise-5-site/data exercise-5-site/js
-cp -n "Exercise 0.2/energy-webpage-v1/PowerIcon.png" exercise-5-site/assets/img/
-cp -n "Exercise 0.2/energy-webpage-v1/site.js" exercise-5-site/assets/js/
-cp -n "Exercise 5/data/"*.csv exercise-5-site/data/
-cp -n "Exercise 5/js/load-data.js" exercise-5-site/js/
+mkdir -p exercise-5_website/assets/css exercise-5_website/assets/js exercise-5_website/assets/img \
+         exercise-5_website/data exercise-5_website/js
+cp -n "Exercise 0.2/energy-webpage-v1/PowerIcon.png" exercise-5_website/assets/img/
+cp -n "Exercise 0.2/energy-webpage-v1/site.js" exercise-5_website/assets/js/
+cp -n "Exercise 5/data/"*.csv exercise-5_website/data/
+cp -n "Exercise 5/js/load-data.js" exercise-5_website/js/
 git status --short    # only the new folder appears; no existing file is modified
 ```
 
 ## Related
 
-- [Exercise 4 website](../exercise-4-site/) · [Exercise 6 website](../exercise-6-site/)
+- [Exercise 4 website](../exercise-4_website/) · [Exercise 6 website](../exercise-6_website/)
 - Original: [Exercise 5](../Exercise%205/)
 
 ## Notes

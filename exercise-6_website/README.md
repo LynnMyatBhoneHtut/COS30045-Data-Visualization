@@ -2,6 +2,9 @@
 
 COS30045 Data Visualisation · Lynn Myat Bhone Htut
 
+- **Live on Mercury:** <https://mercury.swin.edu.au/cos30045/s105973835/Submission/exercise-6_website/> (Swinburne login required)
+- **Source on GitHub:** [exercise-6_website](https://github.com/LynnMyatBhoneHtut/COS30045-Data-Visualization/tree/main/exercise-6_website)
+
 The Exercise 6 interactive charts combined into one page in the style of
 [`Exercise 0.2/energy-webpage-v1`](../Exercise%200.2/energy-webpage-v1/) (same
 header, navigation, colours, fonts and footer). Both charts are on the page as
@@ -13,7 +16,7 @@ soon as it loads, with the headings and descriptions from the original page:
 | 6.3 · 6.4 Energy Consumption by Star Rating | Scatterplot of energy use against star rating; hover a dot to see its screen size |
 
 The "Jump to" links under the title go to each chart. The original
-[`Exercise 6`](../Exercise%206/) folder is untouched.
+[`Exercise 6`](../Exercise%206/) folder's code is unchanged.
 
 ## Pages
 
@@ -36,14 +39,14 @@ The three Exercise 0.2 pages are copied unchanged except for file paths
 as with the original exercise:
 
 - **VS Code Live Server:** open the repository folder, click *Go Live*, then go
-  to <http://127.0.0.1:5500/exercise-6-site/>.
+  to <http://127.0.0.1:5500/exercise-6_website/>.
 - **Terminal:** from the repository root run `python3 -m http.server 8000`, then
-  open <http://localhost:8000/exercise-6-site/>.
+  open <http://localhost:8000/exercise-6_website/>.
 
 ## Folder structure
 
 ```
-exercise-6-site/
+exercise-6_website/
 ├── index.html               the exercise charts (opens first)
 ├── home.html  televisions.html  about.html   from Exercise 0.2
 ├── README.md
@@ -80,18 +83,18 @@ colour-blind separation and contrast on white.
 The reused files were copied with `cp -n`, which never overwrites anything:
 
 ```bash
-mkdir -p exercise-6-site/assets/css exercise-6-site/assets/js exercise-6-site/assets/img \
-         exercise-6-site/data exercise-6-site/js
-cp -n "Exercise 0.2/energy-webpage-v1/PowerIcon.png" exercise-6-site/assets/img/
-cp -n "Exercise 0.2/energy-webpage-v1/site.js" exercise-6-site/assets/js/
-cp -n "Exercise 6/data/Ex6_TVdata_withStar.csv" exercise-6-site/data/
-cp -n "Exercise 6/js/load-data.js" "Exercise 6/js/histogram.js" exercise-6-site/js/
+mkdir -p exercise-6_website/assets/css exercise-6_website/assets/js exercise-6_website/assets/img \
+         exercise-6_website/data exercise-6_website/js
+cp -n "Exercise 0.2/energy-webpage-v1/PowerIcon.png" exercise-6_website/assets/img/
+cp -n "Exercise 0.2/energy-webpage-v1/site.js" exercise-6_website/assets/js/
+cp -n "Exercise 6/data/Ex6_TVdata_withStar.csv" exercise-6_website/data/
+cp -n "Exercise 6/js/load-data.js" "Exercise 6/js/histogram.js" exercise-6_website/js/
 git status --short    # only the new folder appears; no existing file is modified
 ```
 
 ## Related
 
-- [Exercise 4 website](../exercise-4-site/) · [Exercise 5 website](../exercise-5-site/)
+- [Exercise 4 website](../exercise-4_website/) · [Exercise 5 website](../exercise-5_website/)
 - Original: [Exercise 6](../Exercise%206/)
 
 ## Notes

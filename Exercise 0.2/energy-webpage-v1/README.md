@@ -3,30 +3,37 @@
 Exercise 0.2 — COS30045 Data Visualisation, Swinburne University of Technology.
 
 A small three-page website demonstrating HTML structure, external CSS styling
-and vanilla JavaScript interactivity. It will be extended with D3.js
-visualisations in the Week 3 and Week 4 exercises.
+and vanilla JavaScript interactivity. Its design is the base for the later
+exercises: Exercise 3 and the Exercise 4, 5 and 6 websites reuse it.
 
-**Author:** *Lynn Myat Bhone Htut*
-**Student ID:** *105973835*
-**Repository:** **
+- **Author:** Lynn Myat Bhone Htut
+- **Student ID:** 105973835
+- **Repository:** [Exercise 0.2/energy-webpage-v1 on GitHub](https://github.com/LynnMyatBhoneHtut/COS30045-Data-Visualization/tree/main/Exercise%200.2/energy-webpage-v1)
+- **Live site (Mercury):** <https://mercury.swin.edu.au/cos30045/s105973835/Exercise%200.2/energy-webpage-v1/> (Swinburne login required)
 
 ---
+
+## Pages
+
+| Page | File | What's on it |
+|---|---|---|
+| Home | `index.html` | Introduction, "Three things worth knowing" cards, the appliance energy calculator and an FAQ |
+| Televisions | `televisions.html` | A model comparison table (screen, panel, power, yearly kWh and cost) with a **Calculate** button for each model, and notes on reading the numbers |
+| About Us | `about.html` | Why the site exists, its scope, who built it, where the data comes from, what comes next and contact |
 
 ## Folder structure
 
 ```
-/
-  index.html          Home — intro content, energy calculator, FAQ accordion
-  televisions.html    Televisions — placeholder model comparison table
-  about.html          About Us — project background
-  assets/
-    css/styles.css    All styling for the site (no inline styles)
-    js/site.js        Footer year, shared by every page
-    js/faq.js         FAQ accordion behaviour
-    js/calculator.js  Appliance energy calculator
-    img/PowerIcon.png Site logo, links back to Home
-    img/favicon.png   Browser tab icon
-  README.md
+energy-webpage-v1/
+├── index.html        Home: intro content, energy calculator, FAQ accordion
+├── televisions.html  Televisions: model comparison table
+├── about.html        About Us: project background
+├── styles.css        All styling for the site (no inline styles)
+├── site.js           Footer year, used by every page
+├── faq.js            FAQ accordion behaviour
+├── calculator.js     Appliance energy calculator
+├── PowerIcon.png     Site logo, links back to Home
+└── README.md
 ```
 
 ## Features
@@ -38,10 +45,10 @@ visualisations in the Week 3 and Week 4 exercises.
 | Logo top-left, links to Home | `.nav__logo` wrapping `PowerIcon.png` |
 | Hover effect on nav | `.nav__link:hover` in `styles.css` |
 | Active page indicator | `aria-current="page"` styled by `.nav__link[aria-current="page"]` |
-| FAQ hidden by default, toggled by JS | `.faq__answer[hidden]` + `assets/js/faq.js` |
-| External CSS only | `assets/css/styles.css` |
-| Footer with year, name, GenAI note | `<footer class="site-footer">` + `assets/js/site.js` |
-| Energy calculator (extension) | `#calculator` section + `assets/js/calculator.js` |
+| FAQ hidden by default, toggled by JS | `.faq__answer[hidden]` + `faq.js` |
+| External CSS only | `styles.css` |
+| Footer with the current year and name | `<footer class="site-footer">` + `site.js` |
+| Energy calculator (extension) | `#calculator` section + `calculator.js` |
 
 ## How the calculator works
 
@@ -62,7 +69,8 @@ monthly and yearly results are consistent with each other.
   `textContent`, so each calculation replaces the previous one instead of
   appending a new set of results.
 - The results panel is `aria-live="polite"` so screen readers announce updates.
-- The Televisions page links to `index.html?watts=180#calculator`. The
+- Each **Calculate** button on the Televisions page links to the calculator with
+  that model's power rating, for example `index.html?watts=180#calculator`. The
   calculator reads that query string on load, so it still works correctly on a
   fresh page load or a refresh.
 
@@ -75,24 +83,10 @@ serve the folder:
 python3 -m http.server 8000
 ```
 
-Then visit 
-## Before you submit
-
-- [ ] Replace `assets/img/PowerIcon.png` with the logo supplied in the unit materials
-- [ ] Replace **Your Name Here** in all three page footers and in this README
-- [ ] Check the `--amber`, `--ink` and `--teal` values at the top of `styles.css`
-      match the actual logo colours
-- [ ] Replace the placeholder figures with data from Exercise 1
-- [ ] Add your own reflection on the use of Generative AI (see below)
+Then visit <http://localhost:8000/>. VS Code's Live Server works too.
 
 ## Generative AI acknowledgement
 
-*Replace this section with your own honest account. Your unit requires you to
-declare AI use and to reflect critically on it.*
-
-Suggested structure:
-
-- **Tool used:**ChatGPT 3.0
-- **What it was used for:** Generate SVG , content and Logo calculator logic
-- **What you changed:** the parts you rewrote, simplified or corrected yourself
-- **What you learned:** JavaScript Logic aboutcalculator 
+- **Tool used:** ChatGPT 3.0
+- **What it was used for:** generating the SVG, content and logo, and the calculator logic
+- **What I learned:** JavaScript logic for the calculator
