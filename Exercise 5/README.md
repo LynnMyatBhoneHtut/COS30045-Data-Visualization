@@ -6,11 +6,6 @@ spot prices.
 - **Live on Mercury:** <https://mercury.swin.edu.au/cos30045/s105973835/Exercise%205/> (Swinburne login required)
 - **In the website's design:** [exercise-5_website](../exercise-5_website/), live at <https://mercury.swin.edu.au/cos30045/s105973835/Submission/exercise-5_website/>
 
-> The copy on Mercury is a larger version of this exercise ("Exercise 5 -
-> Multi-Chart Webpage") with two more charts: a scatter plot of star rating against
-> energy use, and a donut of energy use by screen technology. Those two charts are
-> not in this folder.
-
 ## Charts
 
 | Exercise | Chart | What it shows |

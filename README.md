@@ -22,11 +22,8 @@ of Technology, built with HTML, CSS, JavaScript and [D3.js](https://d3js.org/).
 | 0.2 | Appliance Energy Consumption website: three pages, an energy calculator and an FAQ | [Exercise 0.2/energy-webpage-v1](Exercise%200.2/energy-webpage-v1/) | [Open](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%200.2/energy-webpage-v1/) |
 | 3 | The same website with two data stories about TV running costs on its Televisions page | [Exercise 3](Exercise%203/) | [Open](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%203/) |
 | 4 | Introduction to D3.js: an SVG house (4.1), then a bar chart built step by step (4.3–4.7) | [Exercise 4](Exercise%204/) | [4.1](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.1/) · [4.3](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.3/) · [4.4](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.4/) · [4.5](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.5/) · [4.6](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.6/) · [4.7](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.7/) |
-| 5 | A bar chart, a line chart and a donut chart | [Exercise 5](Exercise%205/) | [Open](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%205/) ¹ |
+| 5 | A bar chart, a line chart and a donut chart | [Exercise 5](Exercise%205/) | [Open](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%205/) |
 | 6 | An interactive histogram with filters, and a scatterplot with tooltips | [Exercise 6](Exercise%206/) | [Open](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%206/) |
-
-¹ The Mercury copy of Exercise 5 has two more charts than this folder: a
-star-rating scatter plot and a screen-technology donut.
 
 ### Exercise websites
 
