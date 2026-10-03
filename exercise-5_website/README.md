@@ -98,8 +98,3 @@ git status --short    # only the new folder appears; no existing file is modifie
 
 - [Exercise 4 website](../exercise-4_website/) · [Exercise 6 website](../exercise-6_website/)
 - Original: [Exercise 5](../Exercise%205/)
-
-## Notes
-
-- Generative AI: this page was assembled and restyled with the help of Claude
-  (Anthropic). The D3 chart code is the author's own Exercise 5 work.

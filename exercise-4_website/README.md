@@ -98,11 +98,3 @@ git status --short    # only the new folder appears; no existing file is modifie
 - Originals: [4.1](../Exercise%204/Exercise%204.1/) · [4.3](../Exercise%204/Exercise%204.3/) ·
   [4.4](../Exercise%204/Exercise%204.4/) · [4.5](../Exercise%204/Exercise%204.5/) ·
   [4.6](../Exercise%204/Exercise%204.6/) · [4.7](../Exercise%204/Exercise%204.7/)
-
-## Notes
-
-- In 4.7 the label "spark electronics" is a few units wider than the 100-unit
-  label space (in the original too). The page lets the SVG draw past its edge so
-  the first letter isn't cut off; the layout code is unchanged.
-- Generative AI: this page was assembled and restyled with the help of Claude
-  (Anthropic). The D3 chart code is the author's own Exercise 4 work.

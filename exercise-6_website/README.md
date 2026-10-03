@@ -96,10 +96,3 @@ git status --short    # only the new folder appears; no existing file is modifie
 
 - [Exercise 4 website](../exercise-4_website/) · [Exercise 5 website](../exercise-5_website/)
 - Original: [Exercise 6](../Exercise%206/)
-
-## Notes
-
-- Data source: Energy Rating Data for household appliances – Televisions
-  (energyrating.gov.au), downloaded January 2026.
-- Generative AI: this page was assembled and restyled with the help of Claude
-  (Anthropic). The D3 chart code is the author's own Exercise 6 work.

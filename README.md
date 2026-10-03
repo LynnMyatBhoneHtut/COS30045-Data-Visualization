@@ -66,24 +66,7 @@ COS30045-Data-Visualization/
 
 Every folder has its own README that lists its files.
 
-## Running the pages locally
 
-Pages that load CSV files with `d3.csv()` need a web server; they don't work when
-opened straight from a folder. That covers Exercises 4.4–4.7, 5 and 6 and the
-three websites.
-
-- **VS Code Live Server:** open the repository folder, click **Go Live**, then open
-  a page, for example <http://127.0.0.1:5500/exercise-5_website/>.
-- **Terminal:** from the repository root run `python3 -m http.server 8000`, then
-  open a page, for example <http://localhost:8000/Exercise%205/>.
-
-## Tools and libraries
-
-- HTML5, CSS3 and JavaScript
-- [D3.js v7](https://d3js.org/), loaded from `https://d3js.org/d3.v7.min.js`
-- Google Fonts: Archivo, IBM Plex Sans and IBM Plex Mono (website pages) and Roboto (Exercise 6)
-- KNIME Analytics Platform (data preparation for Exercise 3)
-- Visual Studio Code with Live Server, GitHub, and Swinburne's Mercury web server
 
 ## Data
 
@@ -99,19 +82,7 @@ The TV data in Exercises 3 and 6 comes from the Australian Government's
 [Energy Rating](https://www.energyrating.gov.au/) register of televisions
 (Exercise 6: downloaded January 2026; Exercise 3: accessed 15 February 2026).
 
-## Generative AI acknowledgement
 
-Each exercise declares its own use of generative AI; in short:
-
-- **Exercise 0.2:** ChatGPT, for the SVG, content and logo, and the calculator logic.
-- **Exercise 3:** Claude (Anthropic), for guidance on KNIME, the first HTML and CSS,
-  parts of the README and a review of the story's structure. The analysis and every
-  figure come from the author's own KNIME workflow.
-- **Exercise websites:** assembled and restyled with Claude. The D3 chart code is the
-  author's own exercise work.
-- **READMEs:** this README and the folder READMEs were updated with help from Claude.
-
----
 
 ## About the unit
 
