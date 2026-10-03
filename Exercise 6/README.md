@@ -13,7 +13,7 @@ energy use against star rating with a tooltip that shows each model's screen siz
 |---|---|---|
 | 6.1 | Histogram | `d3.bin()` groups the 4,233 models into 14 bins of 200 kWh, from 0 to 2,800 kWh a year. The bins are then fixed, so filtered data falls into the same bins and every bar keeps its place. |
 | 6.2 | Filters | Buttons for **All**, **LED**, **LCD** and **OLED**. Clicking one filters the data, re-bins it and moves the bars to their new heights with a 500 ms transition. The y-axis keeps its scale, so the groups compare directly. |
-| 6.3 | Scatterplot | One dot per model: star rating along the x-axis, labelled energy use up the y-axis, coloured by screen technology with a legend. The dots are 50% opaque so overlaps show where models cluster. |
+| 6.3 | Scatterplot | One dot per model: star rating along the x-axis, labelled energy use up the y-axis, coloured by screen technology with legend. The dots are 50% opaque so overlaps show where models cluster. |
 | 6.4 | Tooltip | Hovering a dot shows that model's screen size in inches in a small box above it; the box fades out when the mouse leaves. |
 
 Page headings: "Energy Consumption for different TV screen types and sizes" (6.1 and

@@ -19,7 +19,7 @@ step is a separate folder with its own page.
 | 4.6 – Scaling charts | [Exercise 4.6](Exercise%204.6/) | A linear scale sizes the bars and a band scale spaces them, on a 500 × 600 canvas | [Open](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.6/) |
 | 4.7 – Adding labels | [Exercise 4.7](Exercise%204.7/) | The finished bar chart, with each brand's name and number of models | [Open](https://mercury.swin.edu.au/cos30045/s105973835/Exercise%204/Exercise%204.7/) |
 
-Each folder has its own README with its files and details.
+Each folder has its own README with its files and detail.
 
 ## Folder structure
 

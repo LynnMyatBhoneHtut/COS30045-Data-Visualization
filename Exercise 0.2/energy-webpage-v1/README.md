@@ -72,7 +72,7 @@ monthly and yearly results are consistent with each other.
 - Each **Calculate** button on the Televisions page links to the calculator with
   that model's power rating, for example `index.html?watts=180#calculator`. The
   calculator reads that query string on load, so it still works correctly on a
-  fresh page load or a refresh.
+  fresh page load or refresh.
 
 ## Running locally
 

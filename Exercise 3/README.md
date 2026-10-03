@@ -17,7 +17,7 @@ The website has three pages: **Home** (introduction, energy calculator and FAQ),
 
 ### The question
 
-Australian televisions carry an energy label showing a star rating and an annual
+Australian televisions carry an energy label showing a star rating , an annual
 energy consumption figure in kWh. The star rating is the most visually prominent
 element, and most shoppers read it as an answer to "how much power will this use?"
 

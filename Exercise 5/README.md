@@ -12,7 +12,7 @@ spot prices.
 |---|---|---|
 | 5.1 | Vertical bar chart with axes | Average labelled energy consumption (kWh/year) of 55-inch TVs by screen technology, sorted from highest to lowest: LED 369, OLED 362, LCD 335 |
 | 5.2 | Scatter plot and line chart | Average spot power price ($ per megawatt hour) in Australia, 1998–2024: from $41.50 in 1998 to a low of $30.25 in 2011 and a peak of $144.50 in 2022 |
-| 5.3 | Donut chart | Proportion of small (770), medium (2,386) and large (1,352) TV models in the data set |
+| 5.3 | Donut chart | Proportion of small (770), medium (2,386) and large (1,352) TV model in the data set |
 
 ## Files
 
