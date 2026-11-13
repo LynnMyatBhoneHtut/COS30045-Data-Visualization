@@ -1,13 +1,4 @@
-// ============================================================
-// COS30045 - Energy Consumption website
-// Exercise 4.3: responsive SVG canvas
-// Exercise 4.4: load and type data from CSV
-// ============================================================
 
-// ---- Exercise 4.3 ----
-// Create an SVG inside the responsive container. The viewBox makes the
-// canvas scale with the window. The border shows the canvas boundary
-// while we are building - remove it for the final visualisation.
 const svg = d3.select(".responsive-svg-container")
     .append("svg")
         .attr("viewBox", "0 0 1200 1600")
